@@ -38,7 +38,7 @@ try:
         trend = "są problemy z wyznaczeniem trendu"
 
     # Read loudly
-    tts = gTTS("Twój cukier to " + str(bg.value) + " i " + trend, lang='pl', lang_check=Falsertrwq)
+    tts = gTTS("Twój cukier to " + str(bg.value) + " i " + trend, lang='pl', lang_check=False)
 
 except:
     tts = gTTS("Połączenie nieudane", lang='pl', lang_check=False)
