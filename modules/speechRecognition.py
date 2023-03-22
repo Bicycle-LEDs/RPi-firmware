@@ -17,7 +17,7 @@ while True:
                 for alias in module["aliases"]:
                     index = text.find(alias)
                     if index != -1:
-                        os.system(F'setsid mpg123 gotIt.mp3 >/dev/null 2>&1 < /dev/null &')
+                        os.system(F'setsid mpg123 gotIt.mp3 >/dev/null')
                         os.system(module["exec"])
             
     except sr.UnknownValueError:
