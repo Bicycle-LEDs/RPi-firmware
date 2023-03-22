@@ -4,9 +4,7 @@ import os, json
 with open('./modules.json') as f:
     modules = json.load(f)
 
-# do some more unrelated things
-while True: 
-    
+while True:
     r = sr.Recognizer()
     with sr.Microphone(device_index=1) as source:
         audio = r.listen(source)
@@ -23,6 +21,6 @@ while True:
                         os.system(module["exec"])
             
     except sr.UnknownValueError:
-        print("Google Speech Recognition could not understand audio")
+        print("Audio nierozpoznawalne")
     except sr.RequestError as e:
-        print("Could not request results from Google Speech Recognition service; {0}".format(e))
+        print("Problem z google speech engine, brak internetu albo coś; {0}".format(e))
