@@ -10,6 +10,10 @@ while True:
         
     with sr.Microphone(device_index=1) as source:
         audio = r.listen(source)
+        for line in audio.splitlines():
+            if b"Unknown PCM" in line:
+                continue
+            sys.stdout.buffer.write(line + b'\n')
 
         # received audio data, now we'll recognize it using Google Speech Recognition
     try:
