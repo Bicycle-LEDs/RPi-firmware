@@ -1,6 +1,5 @@
-import json
 import speech_recognition as sr
-import os
+import os, json
 
 with open('./modules.json') as f:
     modules = json.load(f)

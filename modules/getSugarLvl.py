@@ -1,6 +1,9 @@
 from pydexcom import Dexcom
 from gtts import gTTS
-import os
+import os, json
+
+with open('../credentials.json') as f:
+    login = json.load(f)
 
 tts = gTTS("Łączenie...", lang='pl', lang_check=False)
 tts.save('workingOnIt.mp3')
@@ -9,7 +12,7 @@ os.remove('workingOnIt.mp3')
 
 # Login
 try:
-    dexcom = Dexcom("USERNAME", "PASSWORD", ous=True)
+    dexcom = Dexcom(login["dexcom"]["login"], login["dexcom"]["password"], ous=login["dexcom"]["Outside-US"])
     bg = dexcom.get_current_glucose_reading()
 
     # Get reading
