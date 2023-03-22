@@ -5,7 +5,7 @@ import os, json
 with open('../credentials.json') as f:
     login = json.load(f)
 
-tts = gTTS("Łączenie...", lang='pl', lang_check=False)
+tts = gTTS("Łączenie z serwerem dexcom...", lang='pl', lang_check=False)
 tts.save('workingOnIt.mp3')
 os.system('mpg123 workingOnIt.mp3')
 os.remove('workingOnIt.mp3')
@@ -27,7 +27,7 @@ try:
     elif bg.trend == 3:
         trend = "powoli wzrasta"
     elif bg.trend == 4:
-        trend = "jest stabilny"
+        trend = "stabilnie"
     elif bg.trend == 5:
         trend = "lekko spada"
     elif bg.trend == 6:
@@ -35,10 +35,10 @@ try:
     elif bg.trend == 7:
         trend = "mocno spada"
     else:
-        trend = "są problemy z wyznaczeniem trendu"
+        trend = "wyznaczenie trendu nie powiodło się"
 
     # Read loudly
-    tts = gTTS("Twój cukier to " + str(bg.value) + " i " + trend, lang='pl', lang_check=False)
+    tts = gTTS("" + str(bg.value) + " i " + trend, lang='pl', lang_check=False)
 
 except:
     tts = gTTS("Połączenie nieudane", lang='pl', lang_check=False)
