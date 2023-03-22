@@ -12,7 +12,7 @@ os.remove('workingOnIt.mp3')
 
 # Login
 try:
-    dexcom = Dexcom(login["dexcom"]["login"], login["dexcom"]["password"], ous=login["dexcom"]["Outside-US"])
+    dexcom = Dexcom(login["dexcom"]["login"], login["dexcom"]["password"], ous=login["dexcom"]["OutsideUS"])
     bg = dexcom.get_current_glucose_reading()
 
     # Get reading
