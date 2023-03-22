@@ -7,8 +7,7 @@ with open('../credentials.json') as f:
 
 tts = gTTS("Łączenie z serwerem dexcom...", lang='pl', lang_check=False)
 tts.save('workingOnIt.mp3')
-os.system('mpg123 workingOnIt.mp3')
-os.remove('workingOnIt.mp3')
+os.system('setsid mpg123 workingOnIt.mp3 && rm -rf workingOnIt.mp3 >/dev/null 2>&1 < /dev/null &')
 
 # Login
 try:
@@ -38,7 +37,7 @@ try:
         trend = "wyznaczenie trendu nie powiodło się"
 
     # Read loudly
-    tts = gTTS("" + str(bg.value) + " i " + trend, lang='pl', lang_check=False)
+    tts = gTTS(str(bg.value) + " i " + trend, lang='pl', lang_check=False)
 
 except:
     tts = gTTS("Połączenie nieudane", lang='pl', lang_check=False)
