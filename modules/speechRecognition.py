@@ -5,15 +5,13 @@ with open('./modules.json') as f:
     modules = json.load(f)
 
 r = sr.Recognizer()
+r.energy_threshold = 261.74713980203774
+r.dynamic_energy_threshold=True
 # do some more unrelated things
 while True: 
         
     with sr.Microphone(device_index=1) as source:
         audio = r.listen(source)
-        for line in audio.splitlines():
-            if b"Unknown PCM" in line:
-                continue
-            sys.stdout.buffer.write(line + b'\n')
 
         # received audio data, now we'll recognize it using Google Speech Recognition
     try:
