@@ -2,7 +2,7 @@ from pydexcom import Dexcom
 from gtts import gTTS
 import os
 
-tts = gTTS("Łączenie...", lang='pl')
+tts = gTTS("Łączenie...", lang='pl', lang_check=False)
 tts.save('workingOnIt.mp3')
 os.system('mpg123 workingOnIt.mp3')
 os.remove('workingOnIt.mp3')
@@ -35,10 +35,10 @@ try:
         trend = "są problemy z wyznaczeniem trendu"
 
     # Read loudly
-    tts = gTTS("Twój cukier to " + str(bg.value) + " i " + trend, lang='pl')
+    tts = gTTS("Twój cukier to " + str(bg.value) + " i " + trend, lang='pl', lang_check=Falsertrwq)
 
 except:
-    tts = gTTS("Połączenie nieudane", lang='pl')
+    tts = gTTS("Połączenie nieudane", lang='pl', lang_check=False)
 
 tts.save('dexcom-value.mp3')
 os.system('mpg123 dexcom-value.mp3')
