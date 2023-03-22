@@ -8,7 +8,7 @@ with open('./modules.json') as f:
 r = sr.Recognizer()
 # do some more unrelated things
 while True: 
-    with contextlib.redirect_stdout('/dev/null'):
+    with contextlib.redirect_stderr('/dev/null'):
         with sr.Microphone(device_index=1) as source:
             audio = r.listen(source)
             print("Listening!")
