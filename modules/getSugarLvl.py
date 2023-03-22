@@ -3,10 +3,15 @@ from gtts import gTTS
 import os
 
 # Login
-dexcom = Dexcom("USERNAME", "PASSWORD", ous=True)
+try:
+    dexcom = Dexcom("USERNAME", "PASSWORD", ous=True)
+    bg = dexcom.get_current_glucose_reading()
+    
+except:
+    os.system('mpg123 error.mp3')
+    exit()
 
 # Get reading
-bg = dexcom.get_current_glucose_reading()
 print("Glucose level: ")
 print(bg.value)
 
