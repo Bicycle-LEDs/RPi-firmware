@@ -20,8 +20,8 @@ while True:
                 for alias in module["aliases"]:
                     index = text.find(alias)
                     if index != -1:
-                        os.system('mpg123 gotIt.mp3')
-                        os.system(module["exec"])
+                        os.system(F'setsid mpg123 gotIt.mp3 >/dev/null 2>&1 < /dev/null &')
+                        os.system(F'setsid {module["exec"]} >/dev/null 2>&1 < /dev/null &')
             
     except sr.UnknownValueError:
         print("Google Speech Recognition could not understand audio")
