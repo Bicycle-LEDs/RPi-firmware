@@ -1,12 +1,13 @@
 [
     {
         "name": "Sprawdź poziom cukru",
-        "exec": "python getSugarLvl.py",
+        "exec": "setsid python getSugarLvl.py >/dev/null 2>&1 < /dev/null &",
         "aliases": 
             [
                 "jaki cukier",
                 "podaj cukier",
-                "sprawdź cukier"
+                "sprawdź cukier",
+                "poziom cukru"
             ]
     }
 ]

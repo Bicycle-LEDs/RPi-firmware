@@ -1,4 +1,3 @@
-import time
 import json
 import speech_recognition as sr
 import os
@@ -21,7 +20,7 @@ while True:
                     index = text.find(alias)
                     if index != -1:
                         os.system(F'setsid mpg123 gotIt.mp3 >/dev/null 2>&1 < /dev/null &')
-                        os.system(F'setsid {module["exec"]} >/dev/null 2>&1 < /dev/null &')
+                        os.system(module["exec"])
             
     except sr.UnknownValueError:
         print("Google Speech Recognition could not understand audio")
