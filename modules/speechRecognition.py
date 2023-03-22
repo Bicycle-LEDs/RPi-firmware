@@ -5,8 +5,6 @@ with open('./modules.json') as f:
     modules = json.load(f)
 
 r = sr.Recognizer()
-r.energy_threshold = 261.74713980203774
-r.dynamic_energy_threshold=True
 # do some more unrelated things
 while True: 
         
