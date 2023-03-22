@@ -8,10 +8,11 @@ with open('./modules.json') as f:
 r = sr.Recognizer()
 # do some more unrelated things
 while True: 
-    with contextlib.redirect_stderr('/dev/null'):
-        with sr.Microphone(device_index=1) as source:
-            audio = r.listen(source)
-            print("Listening!")
+    with contextlib.redirect_stdout('/dev/null'):
+        with contextlib.redirect_stderr('/dev/null'):
+            with sr.Microphone(device_index=1) as source:
+                audio = r.listen(source)
+                print("Listening!")
     
         # received audio data, now we'll recognize it using Google Speech Recognition
     try:
