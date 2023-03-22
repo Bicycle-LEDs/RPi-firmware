@@ -5,7 +5,7 @@ import os, json
 with open('../credentials.json') as f:
     login = json.load(f)
 
-tts = gTTS("Łączenie z serwerem dexcom...", lang='pl', lang_check=False)
+tts = gTTS("Łączenie z dexcom...", lang='pl', lang_check=False)
 tts.save('workingOnIt.mp3')
 os.system('setsid mpg123 workingOnIt.mp3 && rm -rf workingOnIt.mp3 >/dev/null 2>&1 < /dev/null &')
 
