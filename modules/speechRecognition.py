@@ -4,10 +4,10 @@ import os, json
 with open('./modules.json') as f:
     modules = json.load(f)
 
-r = sr.Recognizer()
 # do some more unrelated things
 while True: 
-        
+    
+    r = sr.Recognizer()
     with sr.Microphone(device_index=1) as source:
         audio = r.listen(source)
         print("Listening!")
