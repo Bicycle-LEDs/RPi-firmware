@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Sprawdź poziom cukru",
+        "exec": "python getSugarLvl.py",
+        "aliases": 
+            [
+                "jaki cukier",
+                "podaj cukier",
+                "sprawdź cukier"
+            ]
+    }
+]
