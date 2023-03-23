@@ -52,4 +52,4 @@ try:
 
 except:
     print("[ERR] Wykonywanie skryptu getSugarLvl.py nieudane.")
-    os.system('mpg123 {script_dir}/../sounds/scriptError.mp3')
+    os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')
