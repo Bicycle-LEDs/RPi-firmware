@@ -24,7 +24,7 @@ try:
         os.system('setsid mpg123 waiting.mp3 >/dev/null 2>&1 < /dev/null &')
         completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text + " - odpowiedz w maksymalnie 20 słowach"}], max_tokens=100)
         message = completion.choices[0].message.content
-        print("[RESULT] " + message)
+        print("[RESULT] Odpowiedź: " + message)
 
     except sr.UnknownValueError:
         print("[ERR] Audio nierozpoznawalne")

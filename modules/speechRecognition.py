@@ -9,12 +9,12 @@ with open(script_dir + '/modules.json') as f:
 
 i=0
 
-print(colorama.Fore.BLUE + "[INFO] Słuchanie!" + colorama.Style.RESET_ALL)
 while True:
     r = sr.Recognizer()
     with sr.Microphone(device_index=1) as source:
+        print(colorama.Fore.GREEN + "[INFO] Słuchanie!")
         audio = r.listen(source)
-        print(colorama.Fore.GREEN + "[INFO] Próba rozpoznania..." + colorama.Fore.CYAN)
+        print(colorama.Fore.CYAN + "[INFO] Próba rozpoznania..." + colorama.Fore.YELLOW)
 
         # received audio data, now we'll recognize it using Google Speech Recognition
     try:
@@ -24,7 +24,7 @@ while True:
                 for alias in module["aliases"]:
                     index = text.find(alias)
                     if index != -1:
-                        print(colorama.Fore.GREEN + "[INFO] Uruchamianie " + module["exec"] + colorama.Fore.YELLOW)
+                        print(colorama.Fore.GREEN + "[INFO] Uruchamianie " + module["exec"] + colorama.Fore.CYAN)
                         if module["execInBackground"]:
                             os.system(F'setsid python {script_dir}/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
                         else:
@@ -32,10 +32,10 @@ while True:
             
     except sr.UnknownValueError:
         i=0
-        print("[ERR] Audio nierozpoznawalne")
+        print(colorama.Fore.YELLOW + "[WARNING] Audio nierozpoznawalne")
     except sr.RequestError as e:
         i+=1
-        print("[ERR] Problem z google speech engine; {0}".format(e))
+        print(colorama.Fore.RED + "[ERR] Problem z google speech engine; {0}".format(e))
         if i!=3:
             os.system(F'setsid mpg123 {script_dir}/../sounds/connectionError.mp3 >/dev/null')
         else:
