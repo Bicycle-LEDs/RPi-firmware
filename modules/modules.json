@@ -2,6 +2,7 @@
     {
         "name": "Sprawdź poziom cukru",
         "exec": "getSugarLvl.py",
+        "execInBackground": false,
         "aliases": 
             [
                 "jaki cukier",

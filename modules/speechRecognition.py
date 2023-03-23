@@ -25,7 +25,11 @@ while True:
                     index = text.find(alias)
                     if index != -1:
                         os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
-                        os.system(F'setsid python {script_dir}/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
+                        
+                        if module["execInBackground"]:
+                            os.system(F'setsid python {script_dir}/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
+                        else:
+                            os.system(F'python {script_dir}/{module["exec"]}')
             
     except sr.UnknownValueError:
         i=0
@@ -33,7 +37,7 @@ while True:
     except sr.RequestError as e:
         i+=1
         print("Problem z google speech engine, brak internetu albo coś; {0}".format(e))
-        if(i!=3):
+        if i!=3:
             os.system(F'setsid mpg123 {script_dir}/../sounds/connectionError.mp3 >/dev/null')
         else:
             os.system(F'setsid mpg123 {script_dir}/../sounds/connectionErrorLong.mp3 >/dev/null')
