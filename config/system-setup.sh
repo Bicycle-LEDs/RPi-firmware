@@ -19,5 +19,4 @@ makepkg -si --noconfirm
 cd ..
 rm -rf yay-bin
 
-yay -Sy python-pyaudio --noconfirm
-pip install gTTS pydexcom SpeechRecognition colorama
+pip install pyaudio openai gTTS pydexcom SpeechRecognition colorama

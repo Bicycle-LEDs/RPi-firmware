@@ -10,5 +10,14 @@
                 "sprawdź cukier",
                 "poziom cukru"
             ]
+    },
+    {
+        "name": "Rozmawiaj z chatgpt",
+        "exec": "chatgpt.py",
+        "execInBackground": false,
+        "aliases": 
+            [
+                "zadaj pytanie"
+            ]
     }
 ]

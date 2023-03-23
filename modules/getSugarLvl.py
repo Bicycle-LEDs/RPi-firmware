@@ -6,7 +6,7 @@ script_dir=os.path.dirname(os.path.realpath(__file__))
 with open(script_dir + '/../credentials.json') as f:
     login = json.load(f)
 
-print("[INFO] Connecting to Dexcom...")
+print("[INFO] Łączenie z Dexcom...")
 tts = gTTS("Łączenie z Dexcom...", lang='pl', lang_check=False)
 tts.save('workingOnIt.mp3')
 os.system('setsid mpg123 workingOnIt.mp3 && rm -rf workingOnIt.mp3 >/dev/null 2>&1 < /dev/null &')
@@ -17,7 +17,7 @@ try:
     bg = dexcom.get_current_glucose_reading()
 
     # Get reading
-    print("[RESULT] Glucose level: " + str(bg.value) + " - " + bg.trend_description + " (" + bg.trend_arrow + ")")
+    print("[RESULT] Poziom glukozy: " + str(bg.value) + " - " + bg.trend_description + " (" + bg.trend_arrow + ")")
 
     # Create nice trend transcription
     if bg.trend == 1:
@@ -46,4 +46,4 @@ except:
 tts.save('dexcom-value.mp3')
 os.system('mpg123 dexcom-value.mp3')
 os.remove('dexcom-value.mp3')
-print("[INFO] Completed.")
+print("[INFO] Wykonano skrypt.")

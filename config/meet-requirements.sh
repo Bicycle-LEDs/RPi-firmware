@@ -1,2 +1,1 @@
-yay -Sy python-pyaudio --noconfirm
-pip install gTTS pydexcom SpeechRecognition colorama
+pip install gTTS pyaudio openai pydexcom SpeechRecognition colorama
