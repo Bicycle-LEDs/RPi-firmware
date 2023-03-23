@@ -1,9 +1,9 @@
 import os, json
+script_dir=os.path.dirname(os.path.realpath(__file__))
 
 try:
     from gtts import gTTS
     from pydexcom import Dexcom
-    script_dir=os.path.dirname(os.path.realpath(__file__))
 
     with open(script_dir + '/../credentials.json') as f:
         login = json.load(f)
@@ -52,8 +52,4 @@ try:
 
 except:
     print("[ERR] Wykonywanie skryptu getSugarLvl.py nieudane.")
-    from gtts import gTTS
-    tts = gTTS("Wystąpił krytyczny błąd w programie dexcom", lang='pl', lang_check=False)
-    tts.save('response.mp3')
-    os.system('mpg123 response.mp3')
-    os.remove('response.mp3')
+    os.system('mpg123 {script_dir}/../sounds/scriptError.mp3')
