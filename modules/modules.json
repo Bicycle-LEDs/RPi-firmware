@@ -14,7 +14,7 @@
     },
     {
         "name": "Rozmawiaj z chatgpt",
-        "exec": "chatgpt.py",
+        "exec": "chatGpt.py",
         "execInBackground": false,
         "aliases": 
             [

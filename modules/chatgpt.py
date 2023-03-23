@@ -1,6 +1,7 @@
 import os, json, colorama
 colorama.init()
 script_dir=os.path.dirname(os.path.realpath(__file__))
+sysMsg = colorama.Fore.BLUE + "[SYS] " + colorama.Style.RESET_ALL
 infoMsg = colorama.Fore.GREEN + "[INFO]" + colorama.Style.RESET_ALL + " "
 errorMsg = colorama.Fore.RED + "[ERROR]" + colorama.Style.RESET_ALL + " "
 
@@ -19,17 +20,18 @@ try:
         os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
         print(infoMsg + "Słuchanie zapytania...")
         audio = r.listen(source)
-        print(infoMsg + "Przerabianie na tekst...")
+        print(sysMsg + "Przerabianie na tekst...")
 
     try:
         text = r.recognize_google(audio, language='pl-PL').lower()
         print(infoMsg + "Zapytanie: " + colorama.Fore.CYAN + text)
+        print(sysMsg + "Generowanie odpowiedzi...")
         tts = gTTS("Zaczekaj na odpowiedź", lang='pl', lang_check=False)
         tts.save('waiting.mp3')
         os.system('setsid mpg123 waiting.mp3 >/dev/null 2>&1 < /dev/null &')
         completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text + " - odpowiedz w maksymalnie 20 słowach"}], max_tokens=100)
         message = completion.choices[0].message.content
-        print(infoMsg +  "Odpowiedź: " + colorama.Fore.CYAN + message)
+        print(infoMsg +  "Odpowiedź: " + colorama.Fore.RED + message)
 
     except sr.UnknownValueError:
         print(errorMsg +  "Przerobienie audio na tekst nieudane")
