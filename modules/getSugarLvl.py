@@ -26,7 +26,7 @@ try:
         bg = dexcom.get_current_glucose_reading()
 
         # Get reading
-        print(infoMsg + "Poziom glukozy: " + colorama.Fore.RED+str(bg.value) + colorama.Style.RESET_ALL+" - " + colorama.Fore.RED+bg.trend_description + bg.trend_arrow)
+        print(infoMsg + "Poziom glukozy: " + colorama.Fore.RED+str(bg.value) + colorama.Style.RESET_ALL+" - " + colorama.Fore.RED+bg.trend_description + " " + bg.trend_arrow)
 
         # Create nice trend transcription
         if bg.trend == 1:
