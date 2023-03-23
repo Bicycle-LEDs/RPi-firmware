@@ -15,7 +15,7 @@ try:
     with sr.Microphone(device_index=1) as source:
         os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
         audio = r.listen(source)
-        print("[INFO] Listening...")
+        print("[INFO] Rozpoznawanie...")
 
     try:
         text = r.recognize_google(audio, language='pl-PL').lower()
