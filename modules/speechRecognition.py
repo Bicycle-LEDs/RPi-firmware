@@ -30,12 +30,12 @@ while True:
                     index = text.find(alias)
                     if index != -1:
                         if module["execInBackground"]:
-                            print(infoMsg + "Skrypt " + colorama.Fore.RED + module["exec"] + colorama.Style.RESET_ALL + " działa w tle")
+                            print(infoMsg + "Skrypt " + colorama.Fore.RED + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle")
                             os.system(F'setsid python {script_dir}/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
                         else:
-                            print(infoMsg + "Wyswietlanie wyjścia dla " + colorama.Fore.RED + module["exec"])
+                            print(infoMsg + "Uruchamianie " + colorama.Fore.RED + module["exec"])
                             os.system(F'python {script_dir}/{module["exec"]}')
-                            print(infoMsg + colorama.Fore.RED + "Koniec działania skryptu")
+                            print(infoMsg + "Koniec dZiałania " + colorama.Fore.RED + module["exec"])
             
     except sr.UnknownValueError:
         i=0
