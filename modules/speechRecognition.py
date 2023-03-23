@@ -3,7 +3,6 @@ import os, json
 import colorama
 colorama.init()
 
-sysMsg = colorama.Fore.BLUE + "[SYS] " + colorama.Style.RESET_ALL
 infoMsg = colorama.Fore.GREEN + "[INFO] " + colorama.Style.RESET_ALL
 warningMsg = colorama.Fore.YELLOW + "[WARNING] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[ERROR] " + colorama.Style.RESET_ALL
@@ -19,7 +18,7 @@ while True:
     with sr.Microphone() as source:
         print(infoMsg + "Słuchanie...")
         audio = r.listen(source)
-        print(sysMsg + "Próba przetworzenia na tekst...")
+        print(infoMsg + "Próba przetworzenia na tekst...")
 
         # received audio data, now we'll recognize it using Google Speech Recognition
     try:
@@ -34,7 +33,7 @@ while True:
                             print(infoMsg + "Skrypt " + colorama.Fore.RED + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle")
                             os.system(F'setsid python {script_dir}/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
                         else:
-                            print(infoMsg + "Uruchamianie " + colorama.Fore.YELLOW + module["exec"])
+                            print(infoMsg + "Uruchamianie " + colorama.Fore.RED + module["exec"])
                             print(colorama.Fore.YELLOW + "-----------------------")
                             os.system(F'python {script_dir}/{module["exec"]}')
                             print(colorama.Fore.YELLOW + "-----------------------")
