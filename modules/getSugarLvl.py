@@ -17,7 +17,7 @@ try:
     bg = dexcom.get_current_glucose_reading()
 
     # Get reading
-    print("[RESULT] Glucose level: " + str(bg.value))
+    print("[RESULT] Glucose level: " + str(bg.value) + " - " + bg.trend_description + "(" + bg.trend_arrow + ")")
 
     # Create nice trend transcription
     if bg.trend == 1:
