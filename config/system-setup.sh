@@ -5,7 +5,7 @@ echo ! CONFIGURING BASE SYSTEM !
 sudo pacman-mirrors --api --set-branch testing
 sudo pacman-mirrors --fasttrack 5 
 sudo pacman -Syy linux-rpi4-mainline linux-rpi4-mainline-headers --noconfirm
-sudo pacman -Sy mpg123 spotifyd neofetch python-pip git base-devel
+sudo pacman -Sy mpg123 portaudio spotifyd neofetch python-pip git base-devel
 
 sudo mkdir /spotify-cache
 sudo cp ./spotifyd-config.conf /etc/spotifyd.conf
