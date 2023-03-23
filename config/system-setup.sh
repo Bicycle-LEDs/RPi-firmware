@@ -2,6 +2,8 @@
 
 echo ! CONFIGURING BASE SYSTEM !
 
+sudo echo "FONT=Lat2-Terminus16" >> /etc/vconsole.conf
+sudo echo "FONT_MAP=8859-2" >> /etc/vconsole.conf
 sudo pacman-mirrors --api --set-branch testing
 sudo pacman-mirrors --fasttrack 5 
 sudo pacman -Syy linux-rpi4-mainline linux-rpi4-mainline-headers --noconfirm
