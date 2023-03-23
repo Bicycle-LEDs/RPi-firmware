@@ -34,8 +34,10 @@ while True:
                             os.system(F'setsid python {script_dir}/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
                         else:
                             print(infoMsg + "Uruchamianie " + colorama.Fore.RED + module["exec"])
+                            print(colorama.Fore.YELLOW + "-----------------------")
                             os.system(F'python {script_dir}/{module["exec"]}')
-                            print(infoMsg + "Koniec dZiałania " + colorama.Fore.RED + module["exec"])
+                            print(colorama.Fore.YELLOW + "-----------------------")
+                            print(infoMsg + "Koniec działania " + colorama.Fore.RED + module["exec"])
             
     except sr.UnknownValueError:
         i=0
