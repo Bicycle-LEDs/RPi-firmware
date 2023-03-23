@@ -19,7 +19,7 @@ try:
 
     try:
         text = r.recognize_google(audio, language='pl-PL').lower()
-        tts = gTTS("Czekam na odpowiedź", lang='pl', lang_check=False)
+        tts = gTTS("Zaczekaj na odpowiedź", lang='pl', lang_check=False)
         tts.save('waiting.mp3')
         os.system('setsid mpg123 waiting.mp3 >/dev/null 2>&1 < /dev/null &')
         completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text + " - odpowiedz w maksymalnie 20 słowach"}], max_tokens=100)
