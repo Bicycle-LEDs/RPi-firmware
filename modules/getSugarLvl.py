@@ -8,6 +8,8 @@ try:
     with open(script_dir + '/../credentials.json') as f:
         login = json.load(f)
 
+    os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
+    
     print("[INFO] Łączenie z Dexcom...")
     tts = gTTS("Łączenie z Dexcom...", lang='pl', lang_check=False)
     tts.save('workingOnIt.mp3')

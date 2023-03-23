@@ -24,8 +24,6 @@ while True:
                 for alias in module["aliases"]:
                     index = text.find(alias)
                     if index != -1:
-                        os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
-
                         print(colorama.Fore.GREEN + "[INFO] Uruchamianie " + module["exec"] + colorama.Fore.YELLOW)
                         if module["execInBackground"]:
                             os.system(F'setsid python {script_dir}/{module["exec"]} >/dev/null 2>&1 < /dev/null &')

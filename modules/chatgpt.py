@@ -13,17 +13,18 @@ try:
 
     r = sr.Recognizer()
     with sr.Microphone(device_index=1) as source:
+        os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
         audio = r.listen(source)
         print("[INFO] Listening...")
 
     try:
         text = r.recognize_google(audio, language='pl-PL').lower()
-        tts = gTTS("Czekam na odpowiedź od chatgpt", lang='pl', lang_check=False)
+        tts = gTTS("Czekam na odpowiedź", lang='pl', lang_check=False)
         tts.save('waiting.mp3')
         os.system('setsid mpg123 waiting.mp3 >/dev/null 2>&1 < /dev/null &')
         completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text}])
         message = "Odpowiedź: " + completion.choices[0].message.content
-        print("[RESULT] Odpowiedź: " + message)
+        print("[RESULT] " + message)
 
     except sr.UnknownValueError:
         print("[ERR] Audio nierozpoznawalne")
