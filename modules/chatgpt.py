@@ -40,9 +40,9 @@ try:
     print("[INFO] Wykonano skrypt.")
 
 except:
-    print("[ERR] Wykonywanie skryptu nieudane.")
+    print("[ERR] Wykonywanie skryptu chatgpt.py nieudane.")
     from gtts import gTTS
-    tts = gTTS("Wystąpił krytyczny błąd w skrypcie", lang='pl', lang_check=False)
+    tts = gTTS("Wystąpił krytyczny błąd w programie chatgpt", lang='pl', lang_check=False)
     tts.save('response.mp3')
     os.system('mpg123 response.mp3')
     os.remove('response.mp3')
