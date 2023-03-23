@@ -10,7 +10,6 @@ sudo pacman -Syy linux-rpi4-mainline linux-rpi4-mainline-headers --noconfirm
 sudo pacman -Sy mpg123 portaudio spotifyd neofetch python-pip git base-devel
 
 sudo mkdir /spotify-cache
-sudo cp ./spotifyd-config.conf /etc/spotifyd.conf
 sudo loginctl enable-linger $USER
 systemctl --user enable spotifyd.service
 
