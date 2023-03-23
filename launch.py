@@ -1,6 +1,6 @@
 import os
 from colorama import init, Fore, Style
 init()
-print(Fore.RED + "[INFO] Uruchamianie..." + Style.RESET_ALL)
+print(Fore.RED + "[INFO]" + Style.RESET_ALL + " Uruchamianie...")
 
 os.system('python ./modules/speechRecognition.py 2>/dev/null')

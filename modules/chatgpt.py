@@ -15,7 +15,7 @@ try:
     openai.api_key = login["openai"]["apiKey"]
 
     r = sr.Recognizer()
-    with sr.Microphone(device_index=2) as source:
+    with sr.Microphone() as source:
         os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
         print(infoMsg + "Słuchanie zapytania...")
         audio = r.listen(source)

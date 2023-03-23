@@ -15,7 +15,7 @@ i=0
 
 while True:
     r = sr.Recognizer()
-    with sr.Microphone(device_index=2) as source:
+    with sr.Microphone() as source:
         print(infoMsg + "Słuchanie...")
         audio = r.listen(source)
         print(infoMsg + "Próba przetworzenia na tekst...")
