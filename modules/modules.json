@@ -17,7 +17,9 @@
         "execInBackground": false,
         "aliases": 
             [
-                "zadaj pytanie"
+                "zadaj pytanie",
+                "rozmowa z chatgpt",
+                "chcę porozmawiać"
             ]
     }
 ]
