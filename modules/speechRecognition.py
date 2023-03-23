@@ -11,7 +11,7 @@ i=0
 
 while True:
     r = sr.Recognizer()
-    with sr.Microphone(device_index=1) as source:
+    with sr.Microphone(device_index=2) as source:
         print(colorama.Fore.GREEN + "[INFO] Słuchanie!")
         audio = r.listen(source)
         print(colorama.Fore.CYAN + "[INFO] Próba rozpoznania..." + colorama.Fore.YELLOW)
