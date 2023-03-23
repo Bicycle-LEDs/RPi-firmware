@@ -21,7 +21,7 @@ while True:
                     index = text.find(alias)
                     if index != -1:
                         os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
-                        os.system(module["exec"])
+                        os.system(F'setsid python {script_dir}/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
             
     except sr.UnknownValueError:
         i=0
