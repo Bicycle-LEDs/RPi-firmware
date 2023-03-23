@@ -9,12 +9,12 @@ with open(script_dir + '/modules.json') as f:
 
 i=0
 
-print(colorama.Fore.BLUE + "Listening!" + colorama.Style.RESET_ALL)
+print(colorama.Fore.BLUE + "[INFO] Listening!" + colorama.Style.RESET_ALL)
 while True:
     r = sr.Recognizer()
     with sr.Microphone(device_index=1) as source:
         audio = r.listen(source)
-        print(colorama.Fore.GREEN + "You're talking, trying to recognize..." + colorama.Fore.CYAN)
+        print(colorama.Fore.GREEN + "[INFO] Trying to recognize..." + colorama.Fore.CYAN)
 
         # received audio data, now we'll recognize it using Google Speech Recognition
     try:
@@ -25,7 +25,8 @@ while True:
                     index = text.find(alias)
                     if index != -1:
                         os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
-                        
+
+                        print(colorama.Fore.GREEN + "[INFO] Executing " + module["exec"] + colorama.Fore.YELLOW)
                         if module["execInBackground"]:
                             os.system(F'setsid python {script_dir}/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
                         else:
