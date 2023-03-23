@@ -12,7 +12,7 @@ try:
     openai.api_key = login["openai"]["apiKey"]
 
     r = sr.Recognizer()
-    with sr.Microphone(device_index=1) as source:
+    with sr.Microphone(device_index=2) as source:
         os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
         print("[INFO] Słuchanie!")
         audio = r.listen(source)
@@ -20,6 +20,7 @@ try:
 
     try:
         text = r.recognize_google(audio, language='pl-PL').lower()
+        print("[INFO] Zapytanie: " + text)
         tts = gTTS("Zaczekaj na odpowiedź", lang='pl', lang_check=False)
         tts.save('waiting.mp3')
         os.system('setsid mpg123 waiting.mp3 >/dev/null 2>&1 < /dev/null &')

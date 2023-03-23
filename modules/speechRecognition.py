@@ -19,6 +19,7 @@ while True:
         # received audio data, now we'll recognize it using Google Speech Recognition
     try:
         text = r.recognize_google(audio, language='pl-PL').lower()
+        print(colorama.Fore.YELLOW + "[INFO] Rozpoznany tekst: " + text)
         i=0
         for module in modules:
                 for alias in module["aliases"]:
