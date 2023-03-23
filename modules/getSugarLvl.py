@@ -1,5 +1,9 @@
-import os, json
+import os, json, colorama
 script_dir=os.path.dirname(os.path.realpath(__file__))
+colorama.init()
+script_dir=os.path.dirname(os.path.realpath(__file__))
+infoMsg = colorama.Fore.GREEN + "[INFO]" + colorama.Style.RESET_ALL + " "
+errorMsg = colorama.Fore.RED + "[ERROR]" + colorama.Style.RESET_ALL + " "
 
 try:
     from gtts import gTTS
@@ -10,7 +14,7 @@ try:
 
     os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
     
-    print("[INFO] Łączenie z Dexcom...")
+    print(infoMsg + "Łączenie z Dexcom...")
     tts = gTTS("Łączenie z Dexcom...", lang='pl', lang_check=False)
     tts.save('workingOnIt.mp3')
     os.system('setsid mpg123 workingOnIt.mp3 && rm -rf workingOnIt.mp3 >/dev/null 2>&1 < /dev/null &')
@@ -21,7 +25,7 @@ try:
         bg = dexcom.get_current_glucose_reading()
 
         # Get reading
-        print("[RESULT] Poziom glukozy: " + str(bg.value) + " - " + bg.trend_description + " (" + bg.trend_arrow + ")")
+        print(infoMsg + "Poziom glukozy: " + colorama.Fore.CYAN+str(bg.value) + colorama.Style.RESET_ALL+" - " + colorama.Fore.CYAN+bg.trend_description +  colorama.Style.RESET_ALL+" (" + colorama.Fore.CYAN+bg.trend_arrow + colorama.Style.RESET_ALL+")")
 
         # Create nice trend transcription
         if bg.trend == 1:
@@ -50,8 +54,7 @@ try:
     tts.save('dexcom-value.mp3')
     os.system('mpg123 dexcom-value.mp3')
     os.remove('dexcom-value.mp3')
-    print("[INFO] Wykonano skrypt.")
 
 except:
-    print("[ERR] Wykonywanie skryptu getSugarLvl.py nieudane.")
+    print(errorMsg + "Wystąpił błąd w skrypcie")
     os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')
