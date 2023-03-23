@@ -6,7 +6,7 @@
 3. Clone this repo (`git clone https://github.com/Bicycle-LEDs/RPi-firmware`)
 4. Run `sh RPi-firmware/config/system-setup.sh` 
 
-⚠️ This will move your manjaro branch to *testing*, change kernel to *linux-rpi4-mainline*, install yay, install stuff required to run this project
+⚠️ This will move your manjaro branch to *testing*, install yay, install stuff required to run this project
 
 ## ⚡ To run this project:
 1. Clone this repo (`git clone https://github.com/Bicycle-LEDs/RPi-firmware`) *make sure you have **git** installed*
