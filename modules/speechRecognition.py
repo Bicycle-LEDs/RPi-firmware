@@ -1,16 +1,20 @@
 import speech_recognition as sr
 import os, json
+import colorama
+colorama.init()
 
 script_dir=os.path.dirname(os.path.realpath(__file__))
 with open(script_dir + '/modules.json') as f:
     modules = json.load(f)
 
 i=0
+
+print(colorama.Fore.BLUE + "Listening!" + colorama.Style.RESET_ALL)
 while True:
     r = sr.Recognizer()
     with sr.Microphone(device_index=1) as source:
         audio = r.listen(source)
-        print("Listening!")
+        print(colorama.Fore.GREEN + "You're talking, trying to recognize..." + colorama.Fore.CYAN)
 
         # received audio data, now we'll recognize it using Google Speech Recognition
     try:
