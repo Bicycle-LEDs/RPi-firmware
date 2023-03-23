@@ -14,6 +14,7 @@ try:
     r = sr.Recognizer()
     with sr.Microphone(device_index=1) as source:
         os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
+        print("[INFO] Słuchanie!")
         audio = r.listen(source)
         print("[INFO] Rozpoznawanie...")
 
