@@ -1,7 +1,8 @@
 import speech_recognition as sr
 import os, json
 
-with open('./modules.json') as f:
+script_dir=os.path.dirname(os.path.realpath(__file__))
+with open(script_dir + '/modules.json') as f:
     modules = json.load(f)
 
 i=0
@@ -19,7 +20,7 @@ while True:
                 for alias in module["aliases"]:
                     index = text.find(alias)
                     if index != -1:
-                        os.system(F'setsid mpg123 ../sounds/gotIt.mp3 >/dev/null')
+                        os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
                         os.system(module["exec"])
             
     except sr.UnknownValueError:
@@ -29,6 +30,6 @@ while True:
         i+=1
         print("Problem z google speech engine, brak internetu albo coś; {0}".format(e))
         if(i!=3):
-            os.system(F'setsid mpg123 ../sounds/connectionError.mp3 >/dev/null')
+            os.system(F'setsid mpg123 {script_dir}/../sounds/connectionError.mp3 >/dev/null')
         else:
-            os.system(F'setsid mpg123 ../sounds/connectionErrorLong.mp3 >/dev/null')
+            os.system(F'setsid mpg123 {script_dir}/../sounds/connectionErrorLong.mp3 >/dev/null')

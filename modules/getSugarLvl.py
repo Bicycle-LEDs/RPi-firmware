@@ -1,8 +1,9 @@
 from pydexcom import Dexcom
 from gtts import gTTS
 import os, json
+script_dir=os.path.dirname(os.path.realpath(__file__))
 
-with open('../credentials.json') as f:
+with open(script_dir + '/../credentials.json') as f:
     login = json.load(f)
 
 tts = gTTS("Łączenie z dexcom...", lang='pl', lang_check=False)
