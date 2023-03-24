@@ -8,6 +8,7 @@ script_dir=os.path.dirname(os.path.realpath(__file__))
 # Default message starts
 infoMsg = colorama.Fore.GREEN + "[GETSUGARLVL] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[GETSUGARLVL] " + colorama.Style.RESET_ALL
+ctrlCMsg = "\n" + errorMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
 
 try:
     # Import dexcom library
@@ -52,17 +53,17 @@ try:
         # Read and print
         print(infoMsg + "(TTS) Poziom cukru: " + colorama.Fore.CYAN+str(bg.value) + colorama.Style.RESET_ALL+" - " + colorama.Fore.CYAN+trend + " " + bg.trend_arrow)
         if tts('pl', str(bg.value) + " i " + trend) == 3:
-            print("\n" + errorMsg + "Użyto Ctrl + C, wyjście do nadrzędnego skryptu")
+            print(ctrlCMsg)
 
     # Login error
     except:
         print(errorMsg + "(TTS) Połączenie z Dexcom nieudane")
         if tts('pl', "Połączenie nieudane") == 3:
-            print("\n" + errorMsg + "Użyto Ctrl + C, wyjście do nadrzędnego skryptu")
+            print(ctrlCMsg)
 
 # Ctrl + C handling
 except KeyboardInterrupt:
-        print("\n" + errorMsg + "Użyto Ctrl + C, wyjście do nadrzędnego skryptu")
+    print(ctrlCMsg)
 
 # Critical error handling
 except:

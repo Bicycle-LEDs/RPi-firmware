@@ -8,6 +8,7 @@ script_dir=os.path.dirname(os.path.realpath(__file__))
 # Default message starts
 infoMsg = colorama.Fore.GREEN + "[CHATGPT] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[CHATGPT] " + colorama.Style.RESET_ALL
+ctrlCMsg = "\n" + errorMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
 
 def main():
     try:
@@ -48,19 +49,19 @@ def main():
                 message = completion.choices[0].message.content
                 print(infoMsg +  "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
                 if tts('pl', message) == 3:
-                    print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+                    print(ctrlCMsg)
                     return 3
 
             except:
                 # Problem connecting / generating response
                 print(errorMsg + "(TTS) Połączenie z czatbotem nieudane")
                 if tts('pl', "Połączenie nieudane") == 3:
-                    print("\n" + errorMsg + "Użyto Ctrl + C, wyjście do nadrzędnego skryptu")
+                    print(ctrlCMsg)
 
 
     # Ctrl + C handle
     except KeyboardInterrupt:
-        print("\n" + errorMsg + "Użyto Ctrl + C, wyjście do nadrzędnego skryptu")
+        print(ctrlCMsg)
         return 3
     
     # Critical error

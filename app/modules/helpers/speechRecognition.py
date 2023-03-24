@@ -6,6 +6,7 @@ colorama.init()
 infoMsg = colorama.Fore.GREEN + "[SPEECHRECOGNITION] " + colorama.Style.RESET_ALL
 warningMsg = colorama.Fore.YELLOW + "[SPEECHRECOGNITION] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[SPEECHRECOGNITION] " + colorama.Style.RESET_ALL
+ctrlCMsg = "\n" + errorMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
 
 def speechRecognition(lang):
     try: 
@@ -36,7 +37,7 @@ def speechRecognition(lang):
     
     # Ctrl + C clicked
     except KeyboardInterrupt:
-        print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+        print(ctrlCMsg)
         return 3
 
     # Critical error
