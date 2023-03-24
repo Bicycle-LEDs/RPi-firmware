@@ -9,6 +9,7 @@ from modules.helpers.speechRecognition import speechRecognition
 infoMsg = colorama.Fore.GREEN + "[MAIN] " + colorama.Style.RESET_ALL
 warningMsg = colorama.Fore.YELLOW + "[MAIN] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[MAIN] " + colorama.Style.RESET_ALL
+breakMsg = "------------------------" + colorama.Style.RESET_ALL
 
 # Import modules.json
 script_dir=os.path.dirname(os.path.realpath(__file__))
@@ -66,30 +67,19 @@ while True:
                     if index != -1:
                         # If needed to be executed in background
                         if module["execInBackground"]:
-
-                            # Outdated module message
-                            if module["outdated"]:
-                                message=warningMsg + "Przestarzały skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle"
-                            # Normal message
-                            else:
-                                message=infoMsg + "Skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle"
-                            print(message)
+                            print(F"{infoMsg}Skrypt {colorama.Fore.YELLOW}{module['exec']}{colorama.Style.RESET_ALL} został uruchomiony w tle")
                             # Execute
                             os.system(F'setsid python {script_dir}/modules/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
                         
                         # If executed on top
                         else:
                             print()
-                            # Outdated module message
-                            if module["outdated"]:
-                                message=warningMsg + "Uruchamianie przestarzałego skryptu " + colorama.Fore.YELLOW + module["exec"]
-                            # Normal message
-                            else:
-                                message=infoMsg + "Uruchamianie " + colorama.Fore.YELLOW + module["exec"]
-                            print(message)
+                            print(F"{infoMsg}Uruchamianie {colorama.Fore.YELLOW}{module['exec']}")
+                            print(breakMsg)
                             # Execute
                             os.system(F'python {script_dir}/modules/{module["exec"]}')
-                            print(infoMsg + "Moduł zakończył działanie")
+                            print(F"{infoMsg}Skrypt {colorama.Fore.BLUE}{module['exec']}{colorama.Style.RESET_ALL} zakończył działanie")
+                            print(colorama.Fore.BLUE + breakMsg)
                             print()    
 
     except KeyboardInterrupt:
