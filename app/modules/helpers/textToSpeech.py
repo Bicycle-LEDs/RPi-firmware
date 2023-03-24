@@ -9,7 +9,8 @@ def tts(language, message):
     # Generate random string for filename - to prevent multi-script-running issues
     digits = random.choices(string.digits, k=3)
     letters = random.choices(string.ascii_letters, k=6)
-    filename = random.sample(digits + letters, 9) + '.mp3'
+    sample = random.sample(digits + letters, 9)
+    filename = str(sample) + '.mp3'
 
     # Generate audio file in argument 1 language and saying argument 2 text 
     TTS = gTTS(message, lang=language, lang_check=False)
