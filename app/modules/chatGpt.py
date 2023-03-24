@@ -6,8 +6,8 @@ colorama.init()
 script_dir=os.path.dirname(os.path.realpath(__file__))
 
 # Default message starts
-infoMsg = colorama.Fore.GREEN + "[CHATGPT] " + colorama.Style.RESET_ALL
-errorMsg = colorama.Fore.RED + "[CHATGPT] " + colorama.Style.RESET_ALL
+infoMsg = colorama.Fore.GREEN + "[CGPT] " + colorama.Style.RESET_ALL
+errorMsg = colorama.Fore.RED + "[CGPT] " + colorama.Style.RESET_ALL
 ctrlCMsg = "\n" + infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
 
 try:
@@ -18,12 +18,9 @@ try:
     from helpers.speechRecognition import speechRecognition
     from helpers.textToSpeech import tts
 
-    # Play sound
-    os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
-    print(infoMsg + "Uruchamianie rozpoznawania mowy...")
-
     # Recognize voice
-    text = speechRecognition('pl-PL')
+    print(infoMsg + "Uruchamianie rozpoznawania mowy...")
+    text = speechRecognition(lang='pl-PL', startSound=True)
 
     # If unknown value or module error play error sound
     if text == 1 or text == 2 or text == False:

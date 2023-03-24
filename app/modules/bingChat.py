@@ -13,8 +13,8 @@ toDelete = [
 ]
 
 # Default message starts
-infoMsg = colorama.Fore.GREEN + "[BINGCHAT] " + colorama.Style.RESET_ALL
-errorMsg = colorama.Fore.RED + "[BINGCHAT] " + colorama.Style.RESET_ALL
+infoMsg = colorama.Fore.GREEN + "[BING] " + colorama.Style.RESET_ALL
+errorMsg = colorama.Fore.RED + "[BING] " + colorama.Style.RESET_ALL
 ctrlCMsg = "\n" + infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
 
 try:
@@ -25,12 +25,9 @@ try:
     from helpers.speechRecognition import speechRecognition
     from helpers.textToSpeech import tts
 
-    # Play sound
-    os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
-    print(infoMsg + "Uruchamianie rozpoznawania mowy...")
-
     # Recognize voice
-    text = speechRecognition('pl-PL')
+    print(infoMsg + "Uruchamianie rozpoznawania mowy...")
+    text = speechRecognition(lang='pl-PL', startSound=True)
 
     # If unknown value or module error play error sound
     if text == 1 or text == 2 or text == False:
