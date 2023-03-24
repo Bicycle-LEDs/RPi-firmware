@@ -31,11 +31,11 @@ while True:
                     if index != -1:
                         if module["execInBackground"]:
                             print(infoMsg + "Skrypt " + colorama.Fore.RED + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle")
-                            os.system(F'setsid python {script_dir}/../modules/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
+                            os.system(F'setsid python {script_dir}/modules/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
                         else:
                             print(infoMsg + "Uruchamianie " + colorama.Fore.RED + module["exec"])
                             print(colorama.Fore.YELLOW + "-----------------------")
-                            os.system(F'python {script_dir}/../modules/{module["exec"]}')
+                            os.system(F'python {script_dir}/modules/{module["exec"]}')
                             print(colorama.Fore.YELLOW + "-----------------------")
             
     except sr.UnknownValueError:
@@ -45,6 +45,6 @@ while True:
         i+=1
         print(errorMsg + "Problem z google speech engine: " + colorama.Fore.CYAN + e)
         if i!=3:
-            os.system(F'setsid mpg123 {script_dir}/../sounds/connectionError.mp3 >/dev/null')
+            os.system(F'setsid mpg123 {script_dir}/sounds/connectionError.mp3 >/dev/null')
         else:
-            os.system(F'setsid mpg123 {script_dir}/../sounds/connectionErrorLong.mp3 >/dev/null')
+            os.system(F'setsid mpg123 {script_dir}/sounds/connectionErrorLong.mp3 >/dev/null')
