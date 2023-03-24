@@ -19,7 +19,7 @@ try:
     
     print(infoMsg + "Łączenie z serwerem...")
     # Text to speech but async
-    os.system(F'python {script_dir}/../base/textToSpeech.py pl "Łączenie z dexcom"')    
+    os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Łączenie z dexcom"')    
 
     # Login
     try:
