@@ -1,8 +1,8 @@
 # Import system packages
 import sys, random, string, os, colorama
 colorama.init()
-infoMsg = colorama.Fore.GREEN + "[INFO] " + colorama.Fore.YELLOW + "textToSpeech.py " + colorama.Style.RESET_ALL
-errorMsg = colorama.Fore.RED + "[ERROR] " + colorama.Fore.YELLOW + "textToSpeech.py " + colorama.Style.RESET_ALL
+infoMsg = colorama.Fore.GREEN + "[textToSpeech.py] " + colorama.Style.RESET_ALL
+errorMsg = colorama.Fore.RED + "[textToSpeech.py] " + colorama.Style.RESET_ALL
 
 def tts(language, message):
     try: 
@@ -18,7 +18,6 @@ def tts(language, message):
         print(infoMsg + "Generowanie dźwięku...")
         TTS = gTTS(message, lang=language, lang_check=False)
         TTS.save(filename)
-        print(filename)
         # Read audio file
         print(infoMsg + "Odczyt...")
         os.system('mpg123 ' + filename)

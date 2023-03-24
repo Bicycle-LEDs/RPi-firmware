@@ -3,9 +3,9 @@ import os, json
 import colorama
 colorama.init()
 
-infoMsg = colorama.Fore.GREEN + "[INFO] " + colorama.Style.RESET_ALL
-warningMsg = colorama.Fore.YELLOW + "[WARNING] " + colorama.Style.RESET_ALL
-errorMsg = colorama.Fore.RED + "[ERROR] " + colorama.Style.RESET_ALL
+infoMsg = colorama.Fore.GREEN + "[main.py] " + colorama.Style.RESET_ALL
+warningMsg = colorama.Fore.YELLOW + "[main.py] " + colorama.Style.RESET_ALL
+errorMsg = colorama.Fore.RED + "[main.py] " + colorama.Style.RESET_ALL
 
 script_dir=os.path.dirname(os.path.realpath(__file__))
 with open(script_dir + '/modules/modules.json') as f:

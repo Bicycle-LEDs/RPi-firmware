@@ -1,8 +1,8 @@
 import os, json, colorama
 colorama.init()
 script_dir=os.path.dirname(os.path.realpath(__file__))
-infoMsg = colorama.Fore.GREEN + "[INFO] " + colorama.Fore.YELLOW + "chatGpt.py " + colorama.Style.RESET_ALL
-errorMsg = colorama.Fore.RED + "[ERROR] " + colorama.Fore.YELLOW + "chatGpt.py " + colorama.Style.RESET_ALL
+infoMsg = colorama.Fore.GREEN + "[chatGpt.py] " + colorama.Style.RESET_ALL
+errorMsg = colorama.Fore.RED + "[chatGpt.py] " + colorama.Style.RESET_ALL
 
 try:
     import speech_recognition as sr
