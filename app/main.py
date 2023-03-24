@@ -78,7 +78,7 @@ while True:
                             print(breakMsg)
                             # Execute
                             os.system(F'python {script_dir}/modules/{module["exec"]}')
-                            print(F"{infoMsg}Skrypt {colorama.Fore.BLUE}{module['exec']}{colorama.Style.RESET_ALL} zakończył działanie")
+                            print(F"{infoMsg}Skrypt zakończył działanie")
                             print(colorama.Fore.BLUE + breakMsg)
                             print()    
 
