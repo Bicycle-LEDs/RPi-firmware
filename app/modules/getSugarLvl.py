@@ -48,7 +48,8 @@ try:
             trend = "wyznaczenie trendu nie powiodło się"
 
         # Read loudly
-        tts('pl', bg.value + " i " + trend)
+        tts = tts('pl', bg.value + " i " + trend)
+        print(tts)
 
     except:
         tts('pl', "Połączenie nieudane")
