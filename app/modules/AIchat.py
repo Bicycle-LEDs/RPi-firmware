@@ -30,33 +30,19 @@ try:
     # Import speechrecognition and tts scripts
     from helpers.speechRecognition import speechRecognition
     from helpers.textToSpeech import tts
-
-    voiceErrors=0
-    def detectVoice():
-        # Recognize voice
-        print(infoMsg + "Uruchamianie rozpoznawania mowy...")
-        txt = speechRecognition(lang='pl-PL', startSound=True)
-        # If unknown value or module error retry
-        if txt == 1 or txt == False:
-            voiceErrors+=1
-            # If 3x waited for input
-            if voiceErrors > 2:
-                print(warningMsg + "Mowa nierozpoznana 3x pod rząd, anulowanie")
-                if tts('pl', "Mowa nierozpoznana") == 3: print(ctrlCMsg)
-                return
-            # Retry
-            txt = detectVoice()
-
-        # If ctrl+c was clicked
-        elif txt == 3: 
-            print(ctrlCMsg)
-            return
-
-        return txt
     
-    text = detectVoice()
+    # Recognize voice
+    print(infoMsg + "Uruchamianie rozpoznawania mowy...")
+    text = speechRecognition(lang='pl-PL', startSound=True)
 
-    if not text: chatType=0
+    if text == 1 or text == 2 or text == False:
+        print(warningMsg + "(TTS) Mowa nierozpoznana")
+        if tts('pl', "Mowa nierozpoznana") == 3: print(ctrlCMsg)
+        chatType=0
+    elif text == 3:
+        print(ctrlCMsg)
+        chatType=0
+
     # Open credentials file
     with open(script_dir + '/../credentials.json') as f:
         login = json.load(f)
