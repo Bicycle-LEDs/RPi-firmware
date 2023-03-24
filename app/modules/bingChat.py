@@ -6,8 +6,8 @@ colorama.init()
 script_dir=os.path.dirname(os.path.realpath(__file__))
 
 # Default message starts
-infoMsg = colorama.Fore.GREEN + "[CHATGPT] " + colorama.Style.RESET_ALL
-errorMsg = colorama.Fore.RED + "[CHATGPT] " + colorama.Style.RESET_ALL
+infoMsg = colorama.Fore.GREEN + "[BINGCHAT] " + colorama.Style.RESET_ALL
+errorMsg = colorama.Fore.RED + "[BINGCHAT] " + colorama.Style.RESET_ALL
 ctrlCMsg = "\n" + infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
 
 try:
@@ -45,7 +45,6 @@ try:
             print(infoMsg + "(TTS) Łączenie z bing chat i generowanie odpowiedzi...")
             os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
             message = bot.ask(prompt=text + " - ogranicz odpowiedź do 30 słów", conversation_style=ConversationStyle.balanced)
-            bot.close()
             print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
             if tts('pl', message) == 3:
                 print(ctrlCMsg)
