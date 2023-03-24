@@ -9,66 +9,62 @@ script_dir=os.path.dirname(os.path.realpath(__file__))
 infoMsg = colorama.Fore.GREEN + "[GETSUGARLVL] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[GETSUGARLVL] " + colorama.Style.RESET_ALL
 
-def main():
+try:
+    # Import dexcom library
+    from pydexcom import Dexcom
+    # Import tts script
+    from helpers.textToSpeech import tts
+
+    # Read credentials file
+    with open(script_dir + '/../credentials.json') as f:
+        login = json.load(f)
+
+    # Play sound
+    os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
+    print(infoMsg + "(TTS) Łączenie z serwerem...")
+    os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Łączenie z dexcom"')    
+
     try:
-        # Import dexcom library
-        from pydexcom import Dexcom
-        # Import tts script
-        from helpers.textToSpeech import tts
+        # Try logging-in
+        dexcom = Dexcom(login["dexcom"]["login"], login["dexcom"]["password"], ous=login["dexcom"]["OutsideUS"])
 
-        # Read credentials file
-        with open(script_dir + '/../credentials.json') as f:
-            login = json.load(f)
+        # Get reading
+        bg = dexcom.get_current_glucose_reading()
 
-        # Play sound
-        os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
-        print(infoMsg + "(TTS) Łączenie z serwerem...")
-        os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Łączenie z dexcom"')    
+        # Create nice trend transcription
+        if bg.trend == 1:
+            trend = "bardzo szybko rośnie"
+        elif bg.trend == 2:
+            trend = "szybko rośnie"
+        elif bg.trend == 3:
+            trend = "powoli wzrasta"
+        elif bg.trend == 4:
+            trend = "stabilnie"
+        elif bg.trend == 5:
+            trend = "lekko spada"
+        elif bg.trend == 6:
+            trend = "sporawo spada"
+        elif bg.trend == 7:
+            trend = "mocno spada"
+        else:
+            trend = "wyznaczenie trendu nie powiodło się"
 
-        try:
-            # Try logging-in
-            dexcom = Dexcom(login["dexcom"]["login"], login["dexcom"]["password"], ous=login["dexcom"]["OutsideUS"])
+        # Read and print
+        print(infoMsg + "(TTS) Poziom cukru: " + colorama.Fore.CYAN+str(bg.value) + colorama.Style.RESET_ALL+" - " + colorama.Fore.CYAN+trend + " " + bg.trend_arrow)
+        if tts('pl', str(bg.value) + " i " + trend) == 3:
+            print("\n" + errorMsg + "Użyto Ctrl + C, wyjście do nadrzędnego skryptu")
 
-            # Get reading
-            bg = dexcom.get_current_glucose_reading()
-
-            # Create nice trend transcription
-            if bg.trend == 1:
-                trend = "bardzo szybko rośnie"
-            elif bg.trend == 2:
-                trend = "szybko rośnie"
-            elif bg.trend == 3:
-                trend = "powoli wzrasta"
-            elif bg.trend == 4:
-                trend = "stabilnie"
-            elif bg.trend == 5:
-                trend = "lekko spada"
-            elif bg.trend == 6:
-                trend = "sporawo spada"
-            elif bg.trend == 7:
-                trend = "mocno spada"
-            else:
-                trend = "wyznaczenie trendu nie powiodło się"
-
-            # Read and print
-            print(infoMsg + "(TTS) Poziom cukru: " + colorama.Fore.CYAN+str(bg.value) + colorama.Style.RESET_ALL+" - " + colorama.Fore.CYAN+trend + " " + bg.trend_arrow)
-            if tts('pl', str(bg.value) + " i " + trend) == 3:
-                print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
-                return 3
-
-        # Login error
-        except:
-            print(errorMsg + "(TTS) Połączenie z Dexcom nieudane")
-            if tts('pl', "Połączenie nieudane") == 3:
-                print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
-                return 3
-
-    # Ctrl + C handling
-    except KeyboardInterrupt:
-            print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
-            return 3
-
-    # Critical error handling
+    # Login error
     except:
-        print(errorMsg + "Wystąpił nieprzewidziany błąd w skrypcie")
-        os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')
+        print(errorMsg + "(TTS) Połączenie z Dexcom nieudane")
+        if tts('pl', "Połączenie nieudane") == 3:
+            print("\n" + errorMsg + "Użyto Ctrl + C, wyjście do nadrzędnego skryptu")
+
+# Ctrl + C handling
+except KeyboardInterrupt:
+        print("\n" + errorMsg + "Użyto Ctrl + C, wyjście do nadrzędnego skryptu")
+
+# Critical error handling
+except:
+    print(errorMsg + "Wystąpił nieprzewidziany błąd w skrypcie")
+    os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')

@@ -1,5 +1,5 @@
 # Import system libs
-import os, sys, json, time, colorama, importlib
+import os, sys, json, time, colorama
 colorama.init()    
 
 # Import speechrecognition script 
@@ -19,10 +19,10 @@ with open(script_dir + '/modules/modules.json') as f:
 countErrors=0
 
 def ctrlCProcedure():
-    print(errorMsg + "Użyto Ctrl + C, kończę działanie programu.")
+    print(infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", kończę działanie programu.")
     sys.exit(0)
 
-print(infoMsg + "Serwer rozpoznawania mowy aktywny - użyj" + colorama.Fore.RED + " Ctrl + C " + colorama.Style.RESET_ALL + ", aby wyjść")
+print(infoMsg + "Serwer rozpoznawania mowy aktywny - użyj" + colorama.Fore.RED + " Ctrl + C " + colorama.Style.RESET_ALL + "(kilka razy), aby wyjść")
 # Loop forever
 while True:
 
@@ -88,11 +88,7 @@ while True:
                                 message=infoMsg + "Uruchamianie " + colorama.Fore.YELLOW + module["exec"]
                             print(message)
                             # Execute
-                            main = importlib.import_module(F'modules.{module["exec"]}')
-                            function = getattr(main, "main")
-                            check = function()
-                            if check == 3:
-                                ctrlCProcedure()
+                            os.system(F'python {script_dir}/modules/{module["exec"]}')
                             print(infoMsg + "Moduł zakończył działanie")
                             print()    
 

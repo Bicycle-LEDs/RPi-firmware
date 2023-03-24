@@ -3,7 +3,6 @@ import sys, random, string, os, colorama
 colorama.init()
 
 # Default message starts
-warningMsg = colorama.Fore.YELLOW + "[TEXTTOSPEECH] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[TEXTTOSPEECH] " + colorama.Style.RESET_ALL
 
 def tts(language, message):

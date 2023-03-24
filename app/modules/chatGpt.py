@@ -55,13 +55,12 @@ def main():
                 # Problem connecting / generating response
                 print(errorMsg + "(TTS) Połączenie z czatbotem nieudane")
                 if tts('pl', "Połączenie nieudane") == 3:
-                    print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
-                    return 3
+                    print("\n" + errorMsg + "Użyto Ctrl + C, wyjście do nadrzędnego skryptu")
 
 
     # Ctrl + C handle
     except KeyboardInterrupt:
-        print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+        print("\n" + errorMsg + "Użyto Ctrl + C, wyjście do nadrzędnego skryptu")
         return 3
     
     # Critical error
