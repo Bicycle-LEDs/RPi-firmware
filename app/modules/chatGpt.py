@@ -28,7 +28,7 @@ try:
         tts = gTTS("Zaczekaj na odpowiedź", lang='pl', lang_check=False)
         tts.save('waiting.mp3')
         os.system('setsid mpg123 waiting.mp3 >/dev/null 2>&1 < /dev/null &')
-        completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text + " - odpowiedz w maksymalnie 30 słowach"}], max_tokens=100)
+        completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text + " - ogranicz odpowiedź do 30 słów"}], max_tokens=100)
         message = completion.choices[0].message.content
         print(infoMsg +  "Odpowiedź: " + colorama.Fore.CYAN + message)
 
