@@ -88,7 +88,7 @@ while True:
                                 message=infoMsg + "Uruchamianie " + colorama.Fore.YELLOW + module["exec"]
                             print(message)
                             # Execute
-                            main = importlib.import_module(F'modules/{module["exec"]}')
+                            main = importlib.import_module(F'modules.{module["exec"]}')
                             function = getattr(main, "main")
                             check = function()
                             if check == 3:
