@@ -28,4 +28,5 @@ def tts(language, message):
 try: 
     tts(sys.argv[1], sys.argv[2])
 except:
+    print("ERROR")
     pass
