@@ -20,6 +20,5 @@ if not len(sys.argv) > 1:
 
 # Run
 print(infoMsg + " Uruchamianie " + Fore.YELLOW + "main.py")
-print(" ")
 
 os.system(F'python {script_dir}/app/main.py 2>/dev/null')
