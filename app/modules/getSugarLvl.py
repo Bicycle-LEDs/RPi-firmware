@@ -5,8 +5,7 @@ infoMsg = colorama.Fore.GREEN + "[INFO]" + colorama.Style.RESET_ALL + " "
 errorMsg = colorama.Fore.RED + "[ERROR]" + colorama.Style.RESET_ALL + " "
 
 # Import tts script
-sys.path.append('../base')
-from textToSpeech import tts
+from helpers.textToSpeech import tts
 
 try:
     from pydexcom import Dexcom
