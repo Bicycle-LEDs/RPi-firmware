@@ -43,18 +43,20 @@ try:
             if voiceErrors > 2:
                 print(warningMsg + "Mowa nierozpoznana 3x pod rząd, anulowanie")
                 if tts('pl', "Mowa nierozpoznana") == 3: print(ctrlCMsg)
-                sys.exit(0)
+                return
             # Retry
             txt = detectVoice()
 
         # If ctrl+c was clicked
         elif txt == 3: 
             print(ctrlCMsg)
-            sys.exit(1)
+            return
 
         return txt
     
     text = detectVoice()
+    
+    if not text: chatType=0
     # Open credentials file
     with open(script_dir + '/../credentials.json') as f:
         login = json.load(f)
