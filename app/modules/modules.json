@@ -3,7 +3,6 @@
         "name": "Sprawdź poziom cukru",
         "exec": "getSugarLvl.py",
         "execInBackground": false,
-        "outdated": false,
         "aliases": 
             [
                 "jaki cukier",
@@ -17,7 +16,6 @@
         "name": "Rozmawiaj z AI",
         "exec": "AIchat.py",
         "execInBackground": false,
-        "outdated": false,
         "aliases": 
             [
                 "zadaj pytanie",
