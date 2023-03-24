@@ -31,7 +31,7 @@ while True:
                     if index != -1:
                         if module["execInBackground"]:
                             if module["outdated"]:
-                                message=infoMsg + "Przestarzały skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle"
+                                message=warningMsg + "Przestarzały skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle"
                             else:
                                 message=infoMsg + "Skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle"
                             print(message)
@@ -39,7 +39,7 @@ while True:
                         else:
                             print(" ")
                             if module["outdated"]:
-                                message=infoMsg + "Uruchamianie przestarzałego modułu " + colorama.Fore.YELLOW + module["exec"]
+                                message=warningMsg + "Uruchamianie przestarzałego skryptu " + colorama.Fore.YELLOW + module["exec"]
                             else:
                                 message=infoMsg + "Uruchamianie " + colorama.Fore.YELLOW + module["exec"]
                             print(message)
