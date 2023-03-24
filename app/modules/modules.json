@@ -15,7 +15,7 @@
     },
     {
         "name": "Rozmawiaj z AI",
-        "exec": "AIchat.py bing",
+        "exec": "AIchat.py",
         "execInBackground": false,
         "outdated": false,
         "aliases": 

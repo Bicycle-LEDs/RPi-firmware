@@ -2,8 +2,11 @@
 import os, sys, json, colorama, asyncio
 colorama.init()
 
-# Argument parsed will be AI type (openai, bing)
-chatType = sys.argv[1].lower()
+# Argument parsed will be AI type (openai, bing), if no argument fallback to bing
+try:
+    chatType = sys.argv[1].lower()
+except:
+    chatType = 'bing'
 
 # Script directory
 script_dir=os.path.dirname(os.path.realpath(__file__))
@@ -16,8 +19,10 @@ bingToDelete = [
 ]
 
 # Default message starts
-infoMsg = colorama.Fore.GREEN + "[CGPT] " + colorama.Style.RESET_ALL
-errorMsg = colorama.Fore.RED + "[CGPT] " + colorama.Style.RESET_ALL
+if chatType=='openai': textForCons='AI-CGPT'
+elif chatType=='bing': textForCons='AI-BING'
+infoMsg = colorama.Fore.GREEN + F"[{textForCons}] " + colorama.Style.RESET_ALL
+errorMsg = colorama.Fore.RED + F"[{textForCons}] " + colorama.Style.RESET_ALL
 ctrlCMsg = "\n" + infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
 
 try:
