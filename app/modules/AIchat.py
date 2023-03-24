@@ -50,7 +50,6 @@ try:
         # If ctrl+c was clicked
         elif txt == 3: 
             print(ctrlCMsg)
-            sys.exit(0)
 
         return txt
     

@@ -1,5 +1,5 @@
 # Import libs
-import os, json, colorama
+import os, sys, json, colorama
 colorama.init()
 
 # Script directory
