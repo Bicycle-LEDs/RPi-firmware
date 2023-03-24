@@ -19,7 +19,7 @@ with open(script_dir + '/modules/modules.json') as f:
 countErrors=0
 
 def ctrlCProcedure():
-    print(warningMsg + "Użyto Ctrl + C, kończę działanie programu.")
+    print(errorMsg + "Użyto Ctrl + C, kończę działanie programu.")
     sys.exit(0)
 
 def load_module(module):
@@ -29,7 +29,7 @@ def load_module(module):
         return sys.modules[module_path]
     return __import__(module_path, fromlist=[module])
 
-print(infoMsg + "Serwer rozpoznawania mowy aktywny - użyj" + colorama.Fore.RED + " Ctrl + C " + colorama.Style.RESET_ALL + "(kilka razy), aby wyjść")
+print(infoMsg + "Serwer rozpoznawania mowy aktywny - użyj" + colorama.Fore.RED + " Ctrl + C " + colorama.Style.RESET_ALL + ", aby wyjść")
 # Loop forever
 while True:
 

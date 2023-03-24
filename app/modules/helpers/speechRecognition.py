@@ -36,7 +36,7 @@ def speechRecognition(lang):
     
     # Ctrl + C clicked
     except KeyboardInterrupt:
-        print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+        print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
         return 3
 
     # Critical error

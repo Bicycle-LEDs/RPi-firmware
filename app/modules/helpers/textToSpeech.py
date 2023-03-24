@@ -3,7 +3,7 @@ import sys, random, string, os, colorama
 colorama.init()
 
 # Default message starts
-infoMsg = colorama.Fore.GREEN + "[TEXTTOSPEECH] " + colorama.Style.RESET_ALL
+warningMsg = colorama.Fore.YELLOW + "[TEXTTOSPEECH] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[TEXTTOSPEECH] " + colorama.Style.RESET_ALL
 
 def tts(language, message):
@@ -26,7 +26,7 @@ def tts(language, message):
     
     # Ctrl + C clicked
     except KeyboardInterrupt:
-        print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+        print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
         return 3
     
     except:

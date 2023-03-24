@@ -48,20 +48,20 @@ def main():
                 message = completion.choices[0].message.content
                 print(infoMsg +  "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
                 if tts('pl', message) == 3:
-                    print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+                    print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
                     return 3
 
             except:
                 # Problem connecting / generating response
                 print(errorMsg + "(TTS) Połączenie z czatbotem nieudane")
                 if tts('pl', "Połączenie nieudane") == 3:
-                    print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+                    print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
                     return 3
 
 
     # Ctrl + C handle
     except KeyboardInterrupt:
-        print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+        print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
         return 3
     
     # Critical error

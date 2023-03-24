@@ -53,19 +53,19 @@ def main():
             # Read and print
             print(infoMsg + "(TTS) Poziom cukru: " + colorama.Fore.CYAN+str(bg.value) + colorama.Style.RESET_ALL+" - " + colorama.Fore.CYAN+trend + " " + bg.trend_arrow)
             if tts('pl', str(bg.value) + " i " + trend) == 3:
-                print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+                print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
                 return 3
 
         # Login error
         except:
             print(errorMsg + "(TTS) Połączenie z Dexcom nieudane")
             if tts('pl', "Połączenie nieudane") == 3:
-                print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+                print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
                 return 3
 
     # Ctrl + C handling
     except KeyboardInterrupt:
-            print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+            print("\n" + errorMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
             return 3
 
     # Critical error handling
