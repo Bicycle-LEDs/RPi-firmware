@@ -42,6 +42,15 @@ try:
             bot = Chatbot(cookies=login["bingchat"]["cookies"])
 
             # Generate response
+        async def generate():
+            bot = Chatbot(cookies=login["bingchat"]["cookies"])
+            # Generate response
+            print(infoMsg + "(TTS) Łączenie z bing chat i generowanie odpowiedzi...")
+            os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
+            message = await bot.ask(prompt=text + " - ogranicz odpowiedź do 30 słów", conversation_style=ConversationStyle.precise)
+            return message
+
+
             print(infoMsg + "(TTS) Łączenie z bing chat i generowanie odpowiedzi...")
             os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
             message = bot.ask(prompt=text + " - ogranicz odpowiedź do 30 słów", conversation_style=ConversationStyle.balanced)

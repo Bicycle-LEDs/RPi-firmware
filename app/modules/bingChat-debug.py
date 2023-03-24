@@ -56,6 +56,8 @@ else:
 
         for delete in toDelete:
             message = message.replace(delete, "")
+            print(delete)
+            print(message)
 
         print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
         if tts('pl', message) == 3:
