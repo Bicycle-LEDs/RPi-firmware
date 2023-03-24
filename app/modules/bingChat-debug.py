@@ -46,6 +46,7 @@ else:
             return message
         
         message = asyncio.run(generate())
-        print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN + str(message))
+        print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN)
+        print(message)
         if tts('pl', message) == 3:
             print(ctrlCMsg)
