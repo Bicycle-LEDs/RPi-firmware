@@ -3,6 +3,7 @@
         "name": "Sprawdź poziom cukru",
         "exec": "getSugarLvl.py",
         "execInBackground": false,
+        "outdated": false,
         "aliases": 
             [
                 "jaki cukier",
@@ -16,12 +17,12 @@
         "name": "Rozmawiaj z chatgpt",
         "exec": "chatGpt.py",
         "execInBackground": false,
+        "outdated": true,
         "aliases": 
             [
                 "zadaj pytanie",
                 "zadaj pytania",
                 "chcę porozmawiać"
-            ],
-        "outdated": true
+            ]    
     }
 ]
