@@ -20,8 +20,6 @@
         "outdated": false,
         "aliases": 
             [
-                "zadaj pytanie",
-                "zadaj pytania",
                 "chcę porozmawiać"
             ]    
     },
@@ -32,7 +30,6 @@
         "outdated": false,
         "aliases": 
             [
-                "bing czat",
                 "zadaj pytanie do bing"
             ]    
     }
