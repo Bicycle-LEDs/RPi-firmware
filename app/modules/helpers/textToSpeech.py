@@ -1,7 +1,6 @@
 # Import system packages
 import sys, random, string, os, colorama
 colorama.init()
-infoMsg = colorama.Fore.GREEN + "[TEXTTOSPEECH] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[TEXTTOSPEECH] " + colorama.Style.RESET_ALL
 
 def tts(language, message):
@@ -15,7 +14,6 @@ def tts(language, message):
         filename = ''.join(random.sample(digits + letters, 9)) + '.mp3'
 
         # Generate audio file in argument 1 language and saying argument 2 text 
-        print(infoMsg + "Generowanie...")
         TTS = gTTS(message, lang=language, lang_check=False)
         TTS.save(filename)
         # Read audio file
