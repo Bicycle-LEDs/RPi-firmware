@@ -47,6 +47,6 @@ else:
         
         message = asyncio.run(generate())
         print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN)
-        print(message)
+        print(json.load(message)["item"]["messages"][1]["text"])
         if tts('pl', message) == 3:
             print(ctrlCMsg)
