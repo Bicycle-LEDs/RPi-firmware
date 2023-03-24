@@ -6,6 +6,11 @@ colorama.init()
 # Script directory
 script_dir=os.path.dirname(os.path.realpath(__file__))
 
+# Which phrases to delete from response (it's based on web, so sometimes calls return some strange things)
+toDelete=[
+
+]
+
 # Default message starts
 infoMsg = colorama.Fore.GREEN + "[BINGCHAT] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[BINGCHAT] " + colorama.Style.RESET_ALL
@@ -43,10 +48,12 @@ else:
             # Generate response
             print(infoMsg + "(TTS) Łączenie z bing chat i generowanie odpowiedzi...")
             os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
-            message = await bot.ask(prompt=text + " - ogranicz odpowiedź do 30 słów", conversation_style=ConversationStyle.balanced)
+            message = await bot.ask(prompt=text + " - ogranicz odpowiedź do 30 słów", conversation_style=ConversationStyle.precise)
             return message
         
-        message = asyncio.run(generate())
+
+        message = asyncio.run(generate())["item"]["messages"][1]["text"].replace("substring", "")
+        message
         print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN)
         print(message["item"]["messages"][1]["text"])
         if tts('pl', message) == 3:
