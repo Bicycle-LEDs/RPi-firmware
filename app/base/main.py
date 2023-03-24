@@ -8,7 +8,7 @@ warningMsg = colorama.Fore.YELLOW + "[WARNING] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[ERROR] " + colorama.Style.RESET_ALL
 
 script_dir=os.path.dirname(os.path.realpath(__file__))
-with open(script_dir + '/modules.json') as f:
+with open(script_dir + '/../modules/modules.json') as f:
     modules = json.load(f)
 
 i=0
@@ -31,11 +31,11 @@ while True:
                     if index != -1:
                         if module["execInBackground"]:
                             print(infoMsg + "Skrypt " + colorama.Fore.RED + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle")
-                            os.system(F'setsid python {script_dir}/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
+                            os.system(F'setsid python {script_dir}/../modules/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
                         else:
                             print(infoMsg + "Uruchamianie " + colorama.Fore.RED + module["exec"])
                             print(colorama.Fore.YELLOW + "-----------------------")
-                            os.system(F'python {script_dir}/{module["exec"]}')
+                            os.system(F'python {script_dir}/../modules/{module["exec"]}')
                             print(colorama.Fore.YELLOW + "-----------------------")
             
     except sr.UnknownValueError:

@@ -1,5 +1,4 @@
-credentials.json
-config/spotifyd-config.conf
+config/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

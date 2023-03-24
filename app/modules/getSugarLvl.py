@@ -1,23 +1,26 @@
-import os, json, colorama
-script_dir=os.path.dirname(os.path.realpath(__file__))
+import os, json, colorama, sys
 colorama.init()
 script_dir=os.path.dirname(os.path.realpath(__file__))
 infoMsg = colorama.Fore.GREEN + "[INFO]" + colorama.Style.RESET_ALL + " "
 errorMsg = colorama.Fore.RED + "[ERROR]" + colorama.Style.RESET_ALL + " "
 
+# Import tts script
+sys.path.append('../base')
+from textToSpeech import tts
+
 try:
-    from gtts import gTTS
     from pydexcom import Dexcom
 
+    # Read credentials file
     with open(script_dir + '/../credentials.json') as f:
         login = json.load(f)
 
+    # Play sound
     os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
     
     print(infoMsg + "Łączenie z serwerem...")
-    tts = gTTS("Łączenie z Dexcom...", lang='pl', lang_check=False)
-    tts.save('workingOnIt.mp3')
-    os.system('setsid mpg123 workingOnIt.mp3 && rm -rf workingOnIt.mp3 >/dev/null 2>&1 < /dev/null &')
+    # Text to speech but async
+    os.system(F'python {script_dir}/../base/textToSpeech.py pl "Łączenie z dexcom"')    
 
     # Login
     try:
@@ -46,14 +49,10 @@ try:
             trend = "wyznaczenie trendu nie powiodło się"
 
         # Read loudly
-        tts = gTTS(str(bg.value) + " i " + trend, lang='pl', lang_check=False)
+        tts('pl', bg.value + " i " + trend)
 
     except:
-        tts = gTTS("Połączenie nieudane", lang='pl', lang_check=False)
-
-    tts.save('dexcom-value.mp3')
-    os.system('mpg123 dexcom-value.mp3')
-    os.remove('dexcom-value.mp3')
+        tts('pl', "Połączenie nieudane")
 
 except:
     print(errorMsg + "Wystąpił błąd w skrypcie")
