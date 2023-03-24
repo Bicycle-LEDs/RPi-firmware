@@ -37,8 +37,7 @@ try:
         print(infoMsg + "Uruchamianie rozpoznawania mowy...")
         txt = speechRecognition(lang='pl-PL', startSound=True)
         # If unknown value or module error retry
-        print('xd')
-        if txt == 1 or txt == 2 or txt == False:
+        if  txt == 2:
             voiceErrors+=1
             # If 3x waited for input
             if voiceErrors > 2:
