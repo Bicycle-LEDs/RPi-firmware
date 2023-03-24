@@ -64,6 +64,7 @@ try:
 # Ctrl + C handling
 except KeyboardInterrupt:
     print(ctrlCMsg)
+    sys.exit(0)
 
 # Critical error handling
 except:

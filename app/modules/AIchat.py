@@ -51,7 +51,7 @@ try:
         elif txt == 3: 
             print(ctrlCMsg)
             sys.exit(0)
-            
+
         return txt
     
     text = detectVoice()
@@ -109,6 +109,7 @@ try:
 # Ctrl + C handle
 except KeyboardInterrupt:
     print(ctrlCMsg)
+    sys.exit(0)
 
 # Critical error
 except:
