@@ -43,6 +43,6 @@ else:
         print(infoMsg + "(TTS) Łączenie z bing chat i generowanie odpowiedzi...")
         os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
         message = bot.ask(prompt=text + " - ogranicz odpowiedź do 30 słów", conversation_style=ConversationStyle.balanced)
-        print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN + str(message))
+        print((message))
         if tts('pl', message) == 3:
             print(ctrlCMsg)
