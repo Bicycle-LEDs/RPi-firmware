@@ -30,13 +30,11 @@ while True:
                     index = text.find(alias)
                     if index != -1:
                         if module["execInBackground"]:
-                            print(infoMsg + "Skrypt " + colorama.Fore.RED + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle")
+                            print(infoMsg + "Skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle")
                             os.system(F'setsid python {script_dir}/modules/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
                         else:
-                            print(infoMsg + "Uruchamianie " + colorama.Fore.RED + module["exec"])
-                            print(colorama.Fore.YELLOW + "-----------------------")
+                            print(infoMsg + "Uruchamianie " + colorama.Fore.YELLOW + module["exec"])
                             os.system(F'python {script_dir}/modules/{module["exec"]}')
-                            print(colorama.Fore.YELLOW + "-----------------------")
             
     except sr.UnknownValueError:
         i=0
