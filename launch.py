@@ -4,7 +4,7 @@ script_dir=os.path.dirname(os.path.realpath(__file__))
 init()
 
 # Launch
-if sys.argv[1] and sys.argv[1] == 'launch':
+if len(sys.argv) > 1 and sys.argv[1] == 'launch':
 
     print(Fore.GREEN + "[LAUNCH]" + Style.RESET_ALL + " Tak będą wyglądać informacje")
     print(Fore.YELLOW + "[LAUNCH]" + Style.RESET_ALL + " Tak ostrzeżenia")
