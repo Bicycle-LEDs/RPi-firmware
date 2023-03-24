@@ -2,7 +2,7 @@
 import sys, random, string, os
 
 def tts(language, message):
-    try: 
+    # try: 
         # Try importing text-to-speech
         from gtts import gTTS
 
@@ -20,14 +20,12 @@ def tts(language, message):
         os.remove('../temp/' + filename)
         return True
     
-    except:
-        # Return error
-        return False
+    # except:
+    #     # Return error
+    #     return False
 
 # Run function if called as file
 try: 
-    tts = tts(sys.argv[1], sys.argv[2])
-    print(tts)
+    tts(sys.argv[1], sys.argv[2])
 except:
-    print("ERROR")
     pass
