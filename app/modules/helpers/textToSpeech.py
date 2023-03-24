@@ -15,11 +15,10 @@ def tts(language, message):
         filename = ''.join(random.sample(digits + letters, 9)) + '.mp3'
 
         # Generate audio file in argument 1 language and saying argument 2 text 
-        print(infoMsg + "Generowanie dźwięku...")
+        print(infoMsg + "Generowanie...")
         TTS = gTTS(message, lang=language, lang_check=False)
         TTS.save(filename)
         # Read audio file
-        print(infoMsg + "Odtwarzanie dźwięku...")
         os.system('mpg123 ' + filename)
         os.remove(filename)
         return True
