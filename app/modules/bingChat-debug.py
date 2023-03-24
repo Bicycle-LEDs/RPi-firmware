@@ -8,7 +8,7 @@ script_dir=os.path.dirname(os.path.realpath(__file__))
 
 # Which phrases to delete from response (it's based on web, so sometimes calls return some strange things)
 toDelete = [
-    "Czy chcesz wiedzieć coś więcej na ten temat?"
+    "Czy chcesz wiedzieć coś więcej na ten temat?",
     "[^1^]", "[^2^]", "[^3^]", "[^4^]", "[^5^]", "[^6^]"
 ]
 
