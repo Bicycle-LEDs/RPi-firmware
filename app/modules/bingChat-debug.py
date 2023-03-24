@@ -1,5 +1,5 @@
 # Import libraries
-import os, json, colorama
+import os, json, colorama, asyncio
 colorama.init()
 
 # Script directory
@@ -45,7 +45,7 @@ else:
             message = await bot.ask(prompt=text + " - ogranicz odpowiedź do 30 słów", conversation_style=ConversationStyle.balanced)
             return message
         
-        message = generate()
+        message = asyncio.run(generate())
         print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
         if tts('pl', message) == 3:
             print(ctrlCMsg)
