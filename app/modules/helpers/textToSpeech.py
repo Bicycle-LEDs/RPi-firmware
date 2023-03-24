@@ -26,7 +26,8 @@ def tts(language, message):
 
 # Run function if called as file
 try: 
-    tts(sys.argv[1], sys.argv[2])
+    tts = tts(sys.argv[1], sys.argv[2])
+    print(tts)
 except:
     print("ERROR")
     pass
