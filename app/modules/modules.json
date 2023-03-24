@@ -14,23 +14,15 @@
             ]
     },
     {
-        "name": "Rozmawiaj z chatgpt",
-        "exec": "chatGpt.py",
+        "name": "Rozmawiaj z AI",
+        "exec": "AIchat.py bing",
         "execInBackground": false,
         "outdated": false,
         "aliases": 
             [
-                "chcę porozmawiać"
-            ]    
-    },
-    {
-        "name": "Rozmawiaj z bing chat",
-        "exec": "bingChat.py",
-        "execInBackground": false,
-        "outdated": false,
-        "aliases": 
-            [
-                "zadaj pytanie"
-            ]    
+                "zadaj pytanie",
+                "chcę porozmawiać",
+                "mam pytanie",
+            ]
     }
 ]

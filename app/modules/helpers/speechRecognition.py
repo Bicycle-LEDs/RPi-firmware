@@ -6,7 +6,7 @@ colorama.init()
 script_dir=os.path.dirname(os.path.realpath(__file__))
 
 # Default message starts
-infoMsg = colorama.Fore.GREEN + "[STT] " + colorama.Style.RESET_ALL
+infoMsg = colorama.Fore.GREEN + "[SST] " + colorama.Style.RESET_ALL
 warningMsg = colorama.Fore.YELLOW + "[STT] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[STT] " + colorama.Style.RESET_ALL
 ctrlCMsg = "\n" + infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
@@ -22,7 +22,7 @@ def speechRecognition(lang, startSound=False):
             print(infoMsg + "Słuchanie...")
             if startSound:
                 os.system(F'setsid mpg123 {script_dir}/../../sounds/gotIt.mp3 >/dev/null')
-                
+
             audio = r.listen(source)
 
         # Get Google opinion on what was said
