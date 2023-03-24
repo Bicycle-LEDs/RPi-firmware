@@ -13,4 +13,4 @@
 2. Make sure you have `portaudio` (or `libportaudio19-dev`) installed (**for linux only**)
 3. Install requirements (skip this step if used Raspberry configurator) (`sh RPi-firmware/config/meet-requirements.sh`)
 4. Create `credentials.json` file inside `app` folder from example - you need to obtain your chatgpt api key from their "for developers" page
-5. Run script: ```python launch.py``` or `python launch.py *whatever*` to skip updating
+5. Run script: ```python launch.py *whatever*``` - use `*whatever*` (add any argument) to skip updating
