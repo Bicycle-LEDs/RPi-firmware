@@ -23,7 +23,7 @@ os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
 print(infoMsg + "Uruchamianie rozpoznawania mowy...")
 
 # Recognize voice
-text = "ile to 2 + 2"
+text = "co jedzą żółwie"
 
 # If unknown value or module error play error sound
 if text == 1 or text == 2 or text == False:
