@@ -13,11 +13,11 @@ def tts(language, message):
 
     # Generate audio file in argument 1 language and saying argument 2 text 
     TTS = gTTS(message, lang=language, lang_check=False)
-    TTS.save('../temp/' + filename)
+    TTS.save(filename)
     print(filename)
     # Read audio file
-    os.system('mpg123 ../temp/' + filename)
-    os.remove('../temp/' + filename)
+    os.system('mpg123 ' + filename)
+    os.remove(filename)
     return True
     
     # except:
