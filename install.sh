@@ -1,1 +1,1 @@
-pip install gTTS pyaudio openai pydexcom SpeechRecognition colorama EdgeGPT
+pip install setuptools pyaudio openai gTTS pydexcom SpeechRecognition colorama EdgeGPT

@@ -19,4 +19,4 @@ makepkg -si --noconfirm
 cd ..
 rm -rf yay-bin
 
-pip install pyaudio openai gTTS pydexcom SpeechRecognition colorama EdgeGPT
+pip install setuptools pyaudio openai gTTS pydexcom SpeechRecognition colorama EdgeGPT
