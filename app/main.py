@@ -30,11 +30,19 @@ while True:
                     index = text.find(alias)
                     if index != -1:
                         if module["execInBackground"]:
-                            print(infoMsg + "Skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle")
+                            if module["outdated"]:
+                                message=infoMsg + "Przestarzały skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle"
+                            else:
+                                message=infoMsg + "Skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle"
+                            print(message)
                             os.system(F'setsid python {script_dir}/modules/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
                         else:
                             print(" ")
-                            print(infoMsg + "Uruchamianie " + colorama.Fore.YELLOW + module["exec"])
+                            if module["outdated"]:
+                                message=infoMsg + "Uruchamianie przestarzałego modułu " + colorama.Fore.YELLOW + module["exec"]
+                            else:
+                                message=infoMsg + "Uruchamianie " + colorama.Fore.YELLOW + module["exec"]
+                            print(message)
                             os.system(F'python {script_dir}/modules/{module["exec"]}')
                             print(" ")
             
