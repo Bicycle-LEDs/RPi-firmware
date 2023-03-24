@@ -1,58 +1,81 @@
-import speech_recognition as sr
-import os, json
-import colorama
+# Import system libs
+import os, json, time, colorama
 colorama.init()
 
+# Import speechrecognition script 
+from modules.helpers.speechRecognition import speechRecognition
+
+# Default message starts
 infoMsg = colorama.Fore.GREEN + "[MAIN] " + colorama.Style.RESET_ALL
 warningMsg = colorama.Fore.YELLOW + "[MAIN] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[MAIN] " + colorama.Style.RESET_ALL
 
+# Import modules.json
 script_dir=os.path.dirname(os.path.realpath(__file__))
 with open(script_dir + '/modules/modules.json') as f:
     modules = json.load(f)
 
-i=0
+# Var to count errors and play appropriate sounds
+countErrors=0
 
+# Loop forever
 while True:
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        print(infoMsg + "Słuchanie...")
-        audio = r.listen(source)
-        print(infoMsg + "Próba przetworzenia na tekst...")
 
-        # received audio data, now we'll recognize it using Google Speech Recognition
-    try:
-        text = r.recognize_google(audio, language='pl-PL').lower()
-        print(infoMsg + "Rozpoznany tekst: " + colorama.Fore.CYAN + text)
-        i=0
-        for module in modules:
-                for alias in module["aliases"]:
-                    index = text.find(alias)
-                    if index != -1:
-                        if module["execInBackground"]:
-                            if module["outdated"]:
-                                message=warningMsg + "Przestarzały skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle"
-                            else:
-                                message=infoMsg + "Skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle"
-                            print(message)
-                            os.system(F'setsid python {script_dir}/modules/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
-                        else:
-                            print(" ")
-                            if module["outdated"]:
-                                message=warningMsg + "Uruchamianie przestarzałego skryptu " + colorama.Fore.YELLOW + module["exec"]
-                            else:
-                                message=infoMsg + "Uruchamianie " + colorama.Fore.YELLOW + module["exec"]
-                            print(message)
-                            os.system(F'python {script_dir}/modules/{module["exec"]}')
-                            print(" ")
-            
-    except sr.UnknownValueError:
-        i=0
-        print(warningMsg + "Tekst nierozpoznany")
-    except sr.RequestError as e:
-        i+=1
-        print(errorMsg + "Problem z google speech engine: " + colorama.Fore.CYAN + e)
-        if i!=3:
+    # Recognize speech
+    text = speechRecognition('pl-PL')
+
+    # If critical error
+    if text == 1:
+        # Error counter +1
+        countErrors+=1
+        # If not third error
+        if countErrors!=3:
             os.system(F'setsid mpg123 {script_dir}/sounds/connectionError.mp3 >/dev/null')
         else:
             os.system(F'setsid mpg123 {script_dir}/sounds/connectionErrorLong.mp3 >/dev/null')
+    
+    # If unknown value
+    elif text == 2:
+        # Reset connection error counter
+        countErrors=0
+    
+    # If critical module error
+    elif text == False:
+        time.sleep(3)
+
+    # If speech recognized     
+    else:
+        countErrors=0
+        # For every module
+        for module in modules:
+            # For every alias
+            for alias in module["aliases"]:
+                index = text.find(alias)
+                # If alias found
+                if index != -1:
+                    # If needed to be executed in background
+                    if module["execInBackground"]:
+
+                        # Outdated module message
+                        if module["outdated"]:
+                            message=warningMsg + "Przestarzały skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle"
+                        # Normal message
+                        else:
+                            message=infoMsg + "Skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle"
+                        print(message)
+                        # Execute
+                        os.system(F'setsid python {script_dir}/modules/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
+                    
+                    # If executed on top
+                    else:
+                        print()
+                        # Outdated module message
+                        if module["outdated"]:
+                            message=warningMsg + "Uruchamianie przestarzałego skryptu " + colorama.Fore.YELLOW + module["exec"]
+                        # Normal message
+                        else:
+                            message=infoMsg + "Uruchamianie " + colorama.Fore.YELLOW + module["exec"]
+                        print(message)
+                        # Execute
+                        os.system(F'python {script_dir}/modules/{module["exec"]}')
+                        print(" ")

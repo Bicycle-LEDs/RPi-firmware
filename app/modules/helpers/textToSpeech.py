@@ -1,6 +1,8 @@
-# Import system packages
+# Import libs
 import sys, random, string, os, colorama
 colorama.init()
+
+# Default message starts
 errorMsg = colorama.Fore.RED + "[TEXTTOSPEECH] " + colorama.Style.RESET_ALL
 
 def tts(language, message):

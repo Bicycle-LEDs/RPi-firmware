@@ -1,14 +1,19 @@
-import os, json, colorama, sys
+# Import libs
+import os, json, colorama
 colorama.init()
+
+# Script directory
 script_dir=os.path.dirname(os.path.realpath(__file__))
+
+# Default message starts
 infoMsg = colorama.Fore.GREEN + "[GETSUGARLVL] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[GETSUGARLVL] " + colorama.Style.RESET_ALL
 
-# Import tts script
-from helpers.textToSpeech import tts
-
 try:
+    # Import dexcom library
     from pydexcom import Dexcom
+    # Import tts script
+    from helpers.textToSpeech import tts
 
     # Read credentials file
     with open(script_dir + '/../credentials.json') as f:
@@ -50,9 +55,11 @@ try:
         # Read loudly
         tts('pl', str(bg.value) + " i " + trend)
 
+    # Server error
     except:
         tts('pl', "Połączenie nieudane")
 
+# Critical error handling
 except:
     print(errorMsg + "Wystąpił błąd w skrypcie")
     os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')
