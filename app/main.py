@@ -18,6 +18,7 @@ with open(script_dir + '/modules/modules.json') as f:
 # Var to count errors and play appropriate sounds
 countErrors=0
 
+print(infoMsg + "Serwer rozpoznawania mowy aktywny - użyj" + colorama.Fore.RED + " Ctrl + C " + colorama.Style.RESET_ALL + "(kilka razy), aby wyjść")
 # Loop forever
 while True:
 

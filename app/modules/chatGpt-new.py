@@ -14,45 +14,46 @@ try:
     import openai
 
     # Import speechrecognition and tts scripts
+    from helpers.speechRecognition import speechRecognition
+    from helpers.textToSpeech import tts
+
+    # Play sound
+    os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
+    print(infoMsg + "Uruchamianie rozpoznawania mowy...")
+
+    # Recognize voice
     text = speechRecognition('pl-PL')
 
-    with open(script_dir + '/../credentials.json') as f:
-        login = json.load(f)
+     # If unknown value or module error play error sound
+    if text == 1 or text == 2 or text == False:
+        os.system(F'setsid mpg123 {script_dir}/sounds/connectionError.mp3 >/dev/null')
 
-    openai.api_key = login["openai"]["apiKey"]
+    # If speech recognized     
+    else:
 
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
-        print(infoMsg + "Słuchanie zapytania...")
-        audio = r.listen(source)
-        print(infoMsg + "Przerabianie na tekst...")
+        # Open credentials file
+        with open(script_dir + '/../credentials.json') as f:
+            login = json.load(f)
 
-    try:
-        text = r.recognize_google(audio, language='pl-PL').lower()
-        print(infoMsg + "Zapytanie: " + colorama.Fore.CYAN + text)
-        print(infoMsg + "Generowanie odpowiedzi...")
-        tts = gTTS("Zaczekaj na odpowiedź", lang='pl', lang_check=False)
-        tts.save('waiting.mp3')
-        os.system('setsid mpg123 waiting.mp3 >/dev/null 2>&1 < /dev/null &')
-        completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text + " - ogranicz odpowiedź do 30 słów"}], max_tokens=100)
-        message = completion.choices[0].message.content
-        print(infoMsg +  "Odpowiedź: " + colorama.Fore.CYAN + message)
+        try:
+            # Authorize to openai chatgpt
+            print(infoMsg + "Logowanie do openai...")
+            openai.api_key = login["openai"]["apiKey"]
 
-    except sr.UnknownValueError:
-        print(errorMsg +  "Przerobienie audio na tekst nieudane")
-        message = "Wystąpił problem z rozpoznaniem mowy"
+            # Generate response
+            print(infoMsg + "(TTS) Łączenie z chatgpt i generowanie odpowiedzi...")
+            os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
 
-    except sr.RequestError as e:
-        print(errorMsg + "Problem z google speech engine: " + colorama.Fore.CYAN + e)
-        message = "Wystąpił problem z połączeniem"
+            completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text + " - ogranicz odpowiedź do 30 słów"}], max_tokens=100)
+            message = completion.choices[0].message.content
+            print(infoMsg +  "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
+            tts('pl', message)
 
-    tts = gTTS(message, lang='pl', lang_check=False)
-    tts.save('response.mp3')
-    os.system('mpg123 response.mp3')
-    os.remove('response.mp3')
-    os.remove('waiting.mp3')
+        except:
+            print(errorMsg + "(TTS) Połączenie z czatbotem nieudane")
+            tts('pl', "Połączenie nieudane")
+
 
 except:
-    print(errorMsg + "Wystąpił błąd w skrypcie")
+    print(errorMsg + "Wystąpił nieprzewidziany błąd w skrypcie")
     os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')

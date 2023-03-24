@@ -8,9 +8,10 @@ infoMsg = Fore.GREEN + "[LAUNCH] " + Style.RESET_ALL
 startscriptMsg = Fore.YELLOW + "--------------------" + Style.RESET_ALL
 endScriptMsg = Fore.BLUE + "--------------------" + Style.RESET_ALL
 
-print(infoMsg + "Tak będą wyglądać informacje")
-print(Fore.YELLOW + "[LAUNCH]" + Style.RESET_ALL + " Tak ostrzeżenia")
-print(Fore.RED + "[LAUNCH]" + Style.RESET_ALL + " A tak błędy")
+print(infoMsg + "Tak będą wyglądać informacje,")
+print(Fore.YELLOW + "[LAUNCH]" + Style.RESET_ALL + " tak ostrzeżenia,")
+print(Fore.RED + "[LAUNCH]" + Style.RESET_ALL + " a tak błędy.")
+print(infoMsg + "(TTS) Czytane wiadomości będą miały oznaczenie TTS - text to speech.")
 print()
 
 # Update

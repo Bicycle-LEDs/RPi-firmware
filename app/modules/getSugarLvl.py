@@ -21,18 +21,15 @@ try:
 
     # Play sound
     os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
-    
-    print(infoMsg + "Łączenie z serwerem...")
-    # Text to speech but async
+    print(infoMsg + "(TTS) Łączenie z serwerem...")
     os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Łączenie z dexcom"')    
 
-    # Login
     try:
+        # Try logging-in
         dexcom = Dexcom(login["dexcom"]["login"], login["dexcom"]["password"], ous=login["dexcom"]["OutsideUS"])
-        bg = dexcom.get_current_glucose_reading()
 
         # Get reading
-        print(infoMsg + "Poziom cukru: " + colorama.Fore.CYAN+str(bg.value) + colorama.Style.RESET_ALL+" - " + colorama.Fore.CYAN+bg.trend_description + " " + bg.trend_arrow)
+        bg = dexcom.get_current_glucose_reading()
 
         # Create nice trend transcription
         if bg.trend == 1:
@@ -52,14 +49,16 @@ try:
         else:
             trend = "wyznaczenie trendu nie powiodło się"
 
-        # Read loudly
+        # Read and print
+        print(infoMsg + "(TTS) Poziom cukru: " + colorama.Fore.CYAN+str(bg.value) + colorama.Style.RESET_ALL+" - " + colorama.Fore.CYAN+trend + " " + bg.trend_arrow)
         tts('pl', str(bg.value) + " i " + trend)
 
-    # Server error
+    # Login error
     except:
+        print(errorMsg + "(TTS) Połączenie z Dexcom nieudane")
         tts('pl', "Połączenie nieudane")
 
 # Critical error handling
 except:
-    print(errorMsg + "Wystąpił błąd w skrypcie")
+    print(errorMsg + "Wystąpił nieprzewidziany błąd w skrypcie")
     os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')
