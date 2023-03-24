@@ -19,6 +19,7 @@ if not len(sys.argv) > 1:
     print(startscriptMsg)
     os.system('yay -Syu')
     print(endScriptMsg)
+    print()
 
     print(infoMsg + " Aktualizowanie kodu używając polecenia " + Fore.YELLOW + "git pull")
     print(startscriptMsg)
