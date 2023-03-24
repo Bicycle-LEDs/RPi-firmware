@@ -25,4 +25,7 @@ def tts(language, message):
         return False
 
 # Run function if called as file
-tts(sys.argv[1], sys.argv[2])
+try: 
+    tts(sys.argv[1], sys.argv[2])
+except:
+    print()
