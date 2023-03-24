@@ -95,7 +95,7 @@ while True:
                                 message=infoMsg + "Uruchamianie " + colorama.Fore.YELLOW + module["exec"]
                             print(message)
                             # Execute
-                            main = load_module(F'{script_dir}/modules/{module["exec"]}')
+                            main = load_module(F'{script_dir}/modules/{module["exec"]}.py')
                             check = main.main()
                             if check == 3:
                                 ctrlCProcedure()
