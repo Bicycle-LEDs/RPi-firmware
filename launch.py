@@ -4,6 +4,7 @@ import pkg_resources
 script_dir=os.path.dirname(os.path.realpath(__file__))
 init()
 
+print()
 infoMsg = Fore.GREEN + "[LAUNCH] " + Style.RESET_ALL
 startscriptMsg = Fore.YELLOW + "--------------------" + Style.RESET_ALL
 endScriptMsg = Fore.BLUE + "--------------------" + Style.RESET_ALL
