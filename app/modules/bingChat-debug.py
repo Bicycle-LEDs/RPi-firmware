@@ -7,7 +7,7 @@ colorama.init()
 script_dir=os.path.dirname(os.path.realpath(__file__))
 
 # Which phrases to delete from response (it's based on web, so sometimes calls return some strange things)
-toDelete=[
+toDelete = [
     "Czy chcesz wiedzieć coś więcej na ten temat?"
     "[^1^]", "[^2^]", "[^3^]", "[^4^]", "[^5^]", "[^6^]"
 ]
@@ -29,7 +29,7 @@ os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
 print(infoMsg + "Uruchamianie rozpoznawania mowy...")
 
 # Recognize voice
-text = "czy kebab jest dobry"
+text = "ile to 2 + 2"
 
 # If unknown value or module error play error sound
 if text == 1 or text == 2 or text == False:
@@ -51,11 +51,12 @@ else:
             os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
             message = await bot.ask(prompt=text + " - ogranicz odpowiedź do 30 słów", conversation_style=ConversationStyle.precise)
             return message
-        
 
-        message = asyncio.run(generate())["item"]["messages"][1]["text"].replace("substring", "")
-        message
-        print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN)
-        print(message)
+        message = asyncio.run(generate())["item"]["messages"][1]["text"]
+
+        for delete in toDelete:
+            message = message.replace(delete, "")
+
+        print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
         if tts('pl', message) == 3:
             print(ctrlCMsg)
