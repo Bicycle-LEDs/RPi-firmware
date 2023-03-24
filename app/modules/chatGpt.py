@@ -8,7 +8,7 @@ script_dir=os.path.dirname(os.path.realpath(__file__))
 # Default message starts
 infoMsg = colorama.Fore.GREEN + "[CHATGPT] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[CHATGPT] " + colorama.Style.RESET_ALL
-ctrlCMsg = "\n" + errorMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
+ctrlCMsg = "\n" + infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
 
 def main():
     try:
@@ -47,7 +47,7 @@ def main():
                 os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
                 completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text + " - ogranicz odpowiedź do 30 słów"}], max_tokens=100)
                 message = completion.choices[0].message.content
-                print(infoMsg +  "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
+                print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
                 if tts('pl', message) == 3:
                     print(ctrlCMsg)
                     return 3

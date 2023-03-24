@@ -3,8 +3,9 @@ import sys, random, string, os, colorama
 colorama.init()
 
 # Default message starts
+infoMsg = colorama.Fore.GREEN + "[TEXTTOSPEECH] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[TEXTTOSPEECH] " + colorama.Style.RESET_ALL
-ctrlCMsg = "\n" + errorMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
+ctrlCMsg = "\n" + infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
 
 def tts(language, message):
     try: 

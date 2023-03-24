@@ -24,5 +24,16 @@
                 "zadaj pytania",
                 "chcę porozmawiać"
             ]    
+    },
+    {
+        "name": "Rozmawiaj z bing chat",
+        "exec": "bingChat.py",
+        "execInBackground": false,
+        "outdated": false,
+        "aliases": 
+            [
+                "bing czat",
+                "zadaj pytanie do bing"
+            ]    
     }
 ]
