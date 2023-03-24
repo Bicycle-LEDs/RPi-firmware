@@ -1,8 +1,8 @@
 import os, json, colorama, sys
 colorama.init()
 script_dir=os.path.dirname(os.path.realpath(__file__))
-infoMsg = colorama.Fore.GREEN + "[getSugarLvl.py] " + colorama.Style.RESET_ALL
-errorMsg = colorama.Fore.RED + "[getSugarLvl.py] " + colorama.Style.RESET_ALL
+infoMsg = colorama.Fore.GREEN + "[GETSUGARLVL] " + colorama.Style.RESET_ALL
+errorMsg = colorama.Fore.RED + "[GETSUGARLVL] " + colorama.Style.RESET_ALL
 
 # Import tts script
 from helpers.textToSpeech import tts
