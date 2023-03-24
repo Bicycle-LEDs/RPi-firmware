@@ -34,7 +34,12 @@ def speechRecognition(lang):
             print(errorMsg + "Problem z google speech engine: " + e)
             return 1
     
+    # Ctrl + C clicked
+    except KeyboardInterrupt:
+        print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+        return 3
+
     # Critical error
     except:
-        print(errorMsg + "Wystąpił błąd w skrypcie")
+        print(errorMsg + "Wystąpił nieprzewidziany błąd w skrypcie")
         return False

@@ -1,51 +1,70 @@
+# Import libraries
 import os, json, colorama
 colorama.init()
+
+# Script directory
 script_dir=os.path.dirname(os.path.realpath(__file__))
+
+# Default message starts
 infoMsg = colorama.Fore.GREEN + "[CHATGPT] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[CHATGPT] " + colorama.Style.RESET_ALL
 
-try:
-    import speech_recognition as sr
-    from gtts import gTTS
-    import openai
-
-    with open(script_dir + '/../credentials.json') as f:
-        login = json.load(f)
-
-    openai.api_key = login["openai"]["apiKey"]
-
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
-        print(infoMsg + "Słuchanie zapytania...")
-        audio = r.listen(source)
-        print(infoMsg + "Przerabianie na tekst...")
-
+def main():
     try:
-        text = r.recognize_google(audio, language='pl-PL').lower()
-        print(infoMsg + "Zapytanie: " + colorama.Fore.CYAN + text)
-        print(infoMsg + "Generowanie odpowiedzi...")
-        tts = gTTS("Zaczekaj na odpowiedź", lang='pl', lang_check=False)
-        tts.save('waiting.mp3')
-        os.system('setsid mpg123 waiting.mp3 >/dev/null 2>&1 < /dev/null &')
-        completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text + " - ogranicz odpowiedź do 30 słów"}], max_tokens=100)
-        message = completion.choices[0].message.content
-        print(infoMsg +  "Odpowiedź: " + colorama.Fore.CYAN + message)
+        # Import chatgpt library
+        import openai
 
-    except sr.UnknownValueError:
-        print(errorMsg +  "Przerobienie audio na tekst nieudane")
-        message = "Wystąpił problem z rozpoznaniem mowy"
+        # Import speechrecognition and tts scripts
+        from helpers.speechRecognition import speechRecognition
+        from helpers.textToSpeech import tts
 
-    except sr.RequestError as e:
-        print(errorMsg + "Problem z google speech engine: " + colorama.Fore.CYAN + e)
-        message = "Wystąpił problem z połączeniem"
+        # Play sound
+        os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
+        print(infoMsg + "Uruchamianie rozpoznawania mowy...")
 
-    tts = gTTS(message, lang='pl', lang_check=False)
-    tts.save('response.mp3')
-    os.system('mpg123 response.mp3')
-    os.remove('response.mp3')
-    os.remove('waiting.mp3')
+        # Recognize voice
+        text = speechRecognition('pl-PL')
 
-except:
-    print(errorMsg + "Wystąpił błąd w skrypcie")
-    os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')
+        # If unknown value or module error play error sound
+        if text == 1 or text == 2 or text == False:
+            os.system(F'setsid mpg123 {script_dir}/sounds/connectionError.mp3 >/dev/null')
+
+        # If speech recognized     
+        else:
+
+            # Open credentials file
+            with open(script_dir + '/../credentials.json') as f:
+                login = json.load(f)
+
+            try:
+                # Authorize to openai chatgpt
+                print(infoMsg + "Logowanie do openai...")
+                openai.api_key = login["openai"]["apiKey"]
+
+                # Generate response
+                print(infoMsg + "(TTS) Łączenie z chatgpt i generowanie odpowiedzi...")
+                os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
+                completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text + " - ogranicz odpowiedź do 30 słów"}], max_tokens=100)
+                message = completion.choices[0].message.content
+                print(infoMsg +  "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
+                if tts('pl', message) == 3:
+                    print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+                    return 3
+
+            except:
+                # Problem connecting / generating response
+                print(errorMsg + "(TTS) Połączenie z czatbotem nieudane")
+                if tts('pl', "Połączenie nieudane") == 3:
+                    print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+                    return 3
+
+
+    # Ctrl + C handle
+    except KeyboardInterrupt:
+        print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+        return 3
+    
+    # Critical error
+    except:
+        print(errorMsg + "Wystąpił nieprzewidziany błąd w skrypcie")
+        os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')

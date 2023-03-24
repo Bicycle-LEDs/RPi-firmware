@@ -3,6 +3,7 @@ import sys, random, string, os, colorama
 colorama.init()
 
 # Default message starts
+infoMsg = colorama.Fore.GREEN + "[TEXTTOSPEECH] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[TEXTTOSPEECH] " + colorama.Style.RESET_ALL
 
 def tts(language, message):
@@ -22,6 +23,11 @@ def tts(language, message):
         os.system('mpg123 ' + filename)
         os.remove(filename)
         return True
+    
+    # Ctrl + C clicked
+    except KeyboardInterrupt:
+        print("\n" + infoMsg + "Użyto Ctrl + C, poinformowano nadrzędny skrypt")
+        return 3
     
     except:
         # Return error
