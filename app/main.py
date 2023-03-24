@@ -33,8 +33,10 @@ while True:
                             print(infoMsg + "Skrypt " + colorama.Fore.YELLOW + module["exec"] + colorama.Style.RESET_ALL + " został uruchomiony w tle")
                             os.system(F'setsid python {script_dir}/modules/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
                         else:
+                            print(" ")
                             print(infoMsg + "Uruchamianie " + colorama.Fore.YELLOW + module["exec"])
                             os.system(F'python {script_dir}/modules/{module["exec"]}')
+                            print(" ")
             
     except sr.UnknownValueError:
         i=0
