@@ -55,7 +55,7 @@ try:
         return txt
     
     text = detectVoice()
-    
+
     if not text: chatType=0
     # Open credentials file
     with open(script_dir + '/../credentials.json') as f:
@@ -96,10 +96,11 @@ try:
 
             # Delete some garbage from answer 
             for rm in bingToDelete: message = message.replace(rm, "")
-        
-        # Output message
-        print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
-        if tts('pl', message) == 3: print(ctrlCMsg)
+
+        if not chatType==0:            
+            # Output message
+            print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
+            if tts('pl', message) == 3: print(ctrlCMsg)
 
     except:
         # Problem connecting / generating response
