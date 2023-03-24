@@ -1,5 +1,6 @@
 # Import libraries
 import os, json, colorama, asyncio
+from collections import namedtuple
 colorama.init()
 
 # Script directory
@@ -47,6 +48,6 @@ else:
         
         message = asyncio.run(generate())
         print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN)
-        print(json.load(message)["item"]["messages"][1]["text"])
+        print(message["item"]["messages"][1]["text"])
         if tts('pl', message) == 3:
             print(ctrlCMsg)
