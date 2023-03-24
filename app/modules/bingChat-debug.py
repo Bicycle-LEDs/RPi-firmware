@@ -37,12 +37,18 @@ else:
 
         # Authorize to bing ai
         print(infoMsg + "Logowanie do bingchat...")
-        bot = Chatbot(cookies=login["bingchat"]["cookies"])
-
-        # Generate response
-        print(infoMsg + "(TTS) Łączenie z bing chat i generowanie odpowiedzi...")
-        os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
-        message = bot.ask(prompt=text + " - ogranicz odpowiedź do 30 słów", conversation_style=ConversationStyle.balanced)
-        print((message))
+        async def generate():
+            bot = Chatbot(cookies=login["bingchat"]["cookies"])
+            # Generate response
+            print(infoMsg + "(TTS) Łączenie z bing chat i generowanie odpowiedzi...")
+            os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
+            message = await bot.ask(prompt=text + " - ogranicz odpowiedź do 30 słów", conversation_style=ConversationStyle.balanced)
+            return message
+        
+        message = generate()
+        print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
+        if tts('pl', message) == 3:
+            print(ctrlCMsg)
+        print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN + message)
         if tts('pl', message) == 3:
             print(ctrlCMsg)
