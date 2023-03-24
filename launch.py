@@ -15,12 +15,6 @@ print()
 
 # Update
 if not len(sys.argv) > 1:
-    print(infoMsg + " Aktualizowanie systemu używając polecenia " + Fore.YELLOW + "yay -Syu")
-    print(startscriptMsg)
-    os.system('yay -Syu')
-    print(endScriptMsg)
-    print()
-
     print(infoMsg + " Aktualizowanie kodu używając polecenia " + Fore.YELLOW + "git pull")
     print(startscriptMsg)
     os.system('git pull')
@@ -31,6 +25,12 @@ if not len(sys.argv) > 1:
     print(startscriptMsg)
     packages = [dist.project_name for dist in pkg_resources.working_set]
     os.system("pip install --upgrade " + ' '.join(packages))
+    print(endScriptMsg)
+    print()
+
+    print(infoMsg + " Aktualizowanie systemu używając polecenia " + Fore.YELLOW + "yay -Syu")
+    print(startscriptMsg)
+    os.system('yay -Syu')
     print(endScriptMsg)
     print()
 
