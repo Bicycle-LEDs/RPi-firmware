@@ -8,7 +8,7 @@ warningMsg = colorama.Fore.YELLOW + "[WARNING] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[ERROR] " + colorama.Style.RESET_ALL
 
 script_dir=os.path.dirname(os.path.realpath(__file__))
-with open(script_dir + '/../modules/modules.json') as f:
+with open(script_dir + 'modules/modules.json') as f:
     modules = json.load(f)
 
 i=0
