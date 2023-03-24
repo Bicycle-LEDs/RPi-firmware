@@ -8,7 +8,8 @@ script_dir=os.path.dirname(os.path.realpath(__file__))
 
 # Which phrases to delete from response (it's based on web, so sometimes calls return some strange things)
 toDelete=[
-
+    "Czy chcesz wiedzieć coś więcej na ten temat?"
+    "[^1^]", "[^2^]", "[^3^]", "[^4^]", "[^5^]", "[^6^]"
 ]
 
 # Default message starts
@@ -55,6 +56,6 @@ else:
         message = asyncio.run(generate())["item"]["messages"][1]["text"].replace("substring", "")
         message
         print(infoMsg + "(TTS) Odpowiedź: " + colorama.Fore.CYAN)
-        print(message["item"]["messages"][1]["text"])
+        print(message)
         if tts('pl', message) == 3:
             print(ctrlCMsg)
