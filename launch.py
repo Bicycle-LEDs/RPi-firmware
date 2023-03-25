@@ -33,7 +33,7 @@ if not len(sys.argv) > 1:
     print(infoMsg + "Aktualizowanie bibliotek używając polecenia " + Fore.YELLOW + "pip install -U")
     print(startscriptMsg)
     packages = [dist.project_name for dist in pkg_resources.working_set]
-    os.system("pip install --upgrade " + ' '.join(packages))
+    os.system("sudo pip install --upgrade " + ' '.join(packages))
     print(endScriptMsg)
     print()
 

@@ -1,1 +1,1 @@
-pip install setuptools pyaudio openai gTTS pydexcom SpeechRecognition colorama EdgeGPT
+sudo pip install setuptools pyaudio openai gTTS pydexcom SpeechRecognition colorama EdgeGPT adafruit-circuitpython-displayio-ssd1306
