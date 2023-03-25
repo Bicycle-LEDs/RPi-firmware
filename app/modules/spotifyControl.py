@@ -20,7 +20,11 @@ try:
 
     # Connection error function
     def connectionErr():
-        print(warningMsg + F"(TTS) Połączenie ze spotify API nieudane: {response.status_code} - {json.loads(response.content.decode('utf-8'))['error']['message']}")
+        try:
+            errmsg=json.loads(response.content.decode('utf-8'))['error']['message']
+        except:
+            errmsg=response.content.decode('utf-8')
+        print(warningMsg + F"(TTS) Połączenie ze spotify API nieudane: {response.status_code} - {errmsg}")
         if tts('pl', "Połączenie nieudane") == 3: print(ctrlCMsg)
 
     # Recognize voice
@@ -125,3 +129,7 @@ try:
 except KeyboardInterrupt:
     print(ctrlCMsg)
 
+# Critical error handling
+except:
+    print(errorMsg + "Wystąpił nieprzewidziany błąd w skrypcie")
+    os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')
