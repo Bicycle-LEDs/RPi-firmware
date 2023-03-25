@@ -41,5 +41,5 @@ if not len(sys.argv) > 1:
 print(infoMsg + "Uruchamianie programu - " + Fore.YELLOW + "main.py")
 print(startscriptMsg)
 
-os.system(F'python {script_dir}/app/main.py 2>/dev/null')
+os.system(F'sudo python {script_dir}/app/main.py 2>/dev/null')
 print(endScriptMsg)
