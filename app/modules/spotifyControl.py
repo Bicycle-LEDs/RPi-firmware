@@ -106,9 +106,9 @@ try:
                 
                 # Search
                 elif command == "wyszukaj":
-                    query = {'q': text, 'type': 'track', 'limit': '1'}
+                    query = {'q': str(text)}
                     print(urllib.urlencode(query))
-                    response = requests.get(F"{authorize['api_url']}search?{urllib.urlencode(query)}", headers=headers)
+                    response = requests.get(F"{authorize['api_url']}search?{urllib.urlencode(query)}&type=track&limit=1", headers=headers)
                     if response.status_code == 200:
                         song_uri = json.loads(response.content.decode('utf-8'))["tracks"]["items"][0]["uri"]
                         query = { 'uri': song_uri}
