@@ -48,25 +48,25 @@ try:
         for cmd in availableCommands["next"]:
             index = text.find(cmd)
             if index != -1:
-                command = "next"
+                command = "następny"
                 text = text.replace(cmd, "")
         
         for cmd in availableCommands["previous"]:
             index = text.find(cmd)
             if index != -1:
-                command = "prev"
+                command = "poprzedni"
                 text = text.replace(cmd, "")
 
         for cmd in availableCommands["play/pause"]:
             index = text.find(cmd)
             if index != -1:
-                command = "p/p"
+                command = "odtwórz/wstrzymaj"
                 text = text.replace(cmd, "")  
 
         for cmd in availableCommands["search"]:
             index = text.find(cmd)
             if index != -1:
-                command = "search"
+                command = "wyszukaj"
                 text = text.replace(cmd, "")  
         
         if command:
@@ -82,8 +82,7 @@ try:
 
             else: 
                 # Play/pause
-                if command == "p/p":
-                    print(json.loads(response.content.decode('utf-8'))["is_playing"])
+                if command == "odtwórz/wstrzymaj":
                     if json.loads(response.content.decode('utf-8'))["is_playing"]:
                         response = requests.get(F"{authorize['api_url']}me/player/pause", headers=headers)
                         message = 'Zatrzymano utwór'
@@ -93,17 +92,17 @@ try:
                         message = 'Wznowiono odtwarzanie'
 
                 # Next
-                elif command == "next":
+                elif command == "następny":
                     response = requests.get(F"{authorize['api_url']}me/player/next", headers=headers)
                     message = 'Pominięto utwór'
 
                 # Previous
-                elif command == "prev":
+                elif command == "poprzedni":
                     response = requests.get(F"{authorize['api_url']}me/player/previous", headers=headers)
                     message = 'Cofnięto do poprzedniego utworu'
                 
                 # Search
-                elif command == "search":
+                elif command == "wyszukaj":
                     query = { 'q': text, 'type': 'track', 'limit': 1}
                     response = requests.get(F"{authorize['api_url']}search?{urllib.urlencode(query)}", headers=headers)
                     if response.status_code == 200:
@@ -126,7 +125,3 @@ try:
 except KeyboardInterrupt:
     print(ctrlCMsg)
 
-# Critical error handling
-except:
-    print(errorMsg + "Wystąpił nieprzewidziany błąd w skrypcie")
-    os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')
