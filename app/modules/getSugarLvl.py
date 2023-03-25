@@ -51,7 +51,7 @@ try:
             trend = "wyznaczenie trendu nie powiodło się"
 
         # Read and print
-        print(infoMsg + "(TTS) Poziom cukru: " + colorama.Fore.CYAN+str(bg.value) + colorama.Style.RESET_ALL+" - " + colorama.Fore.CYAN+trend + " " + bg.trend_arrow)
+        print(F"(TTS) Poziom cukru: {colorama.Fore.CYAN}{str(bg.value)}{colorama.Style.RESET_ALL} - {colorama.Fore.CYAN}{trend} {bg.trend_arrow}".rjust(len(infoMsg)))
         if tts('pl', str(bg.value) + " i " + trend) == 3:
             print(ctrlCMsg)
 
