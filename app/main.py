@@ -2,8 +2,9 @@
 import os, sys, json, time, colorama
 colorama.init()    
 
-# Import speechrecognition script 
+# Import scripts
 from modules.helpers.speechRecognition import speechRecognition
+from modules.helpers.OLEDRefresh import OLEDRefresh
 
 # Default message starts
 infoMsg = colorama.Fore.GREEN + "[MAIN] " + colorama.Style.RESET_ALL
@@ -24,11 +25,13 @@ def ctrlCProcedure():
     sys.exit(0)
 
 print(infoMsg + "Serwer rozpoznawania mowy aktywny - użyj" + colorama.Fore.RED + " Ctrl + C " + colorama.Style.RESET_ALL + "(kilka razy), aby wyjść")
+
 # Loop forever
 while True:
 
     try:
         # Recognize speech
+        OLEDRefresh()
         text = speechRecognition('pl-PL')
 
 
@@ -75,12 +78,14 @@ while True:
                         else:
                             print()
                             print(F"{infoMsg}Uruchamianie {colorama.Fore.YELLOW}{module['exec']}")
+                            OLEDRefresh(module["exec"])
                             print(breakMsg)
                             # Execute
                             os.system(F'python {script_dir}/modules/{module["exec"]}')
                             print(F"{infoMsg}Skrypt zakończył działanie")
+                            OLEDRefresh()
                             print(colorama.Fore.BLUE + breakMsg)
-                            print()    
+                            print()
 
     except KeyboardInterrupt:
         ctrlCProcedure()

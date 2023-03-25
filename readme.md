@@ -12,5 +12,5 @@
 1. Clone this repo (`git clone https://github.com/Bicycle-LEDs/RPi-firmware`) *make sure you have **git** installed*
 2. Make sure you have `portaudio` (or `libportaudio19-dev`) installed (**for linux only**)
 3. Install requirements (skip this step if used Raspberry configurator) (`sh RPi-firmware/config/meet-requirements.sh`)
-4. Create `credentials.json` file inside `app` folder from example - you need to obtain your chatgpt api key from their "for developers" page and obtain JSON cookies from bing.com for account with chat access using CookieEditor browser extension
+4. Create `settings.json` file inside `app` folder based on `settings.example.json` - you need to obtain your chatgpt api key from their "for developers" page and obtain JSON cookies from bing.com for account with chat access using CookieEditor browser extension
 5. Run script: ```python launch.py```, to skip updating use ```python launch.py *whatever*```

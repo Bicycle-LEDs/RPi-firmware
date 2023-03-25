@@ -44,8 +44,8 @@ try:
         chatType=0
 
     # Open credentials file
-    with open(script_dir + '/../credentials.json') as f:
-        login = json.load(f)
+    with open(script_dir + '/../settings.json') as f:
+        login = json.load(f)["chatAI"]
 
     try:
 
@@ -69,7 +69,7 @@ try:
 
             # Authorize to bing AI
             print(infoMsg + "Logowanie do bingchat...")
-            bot = EdgeGPT.Chatbot(cookies=login["bingchat"]["cookies"])
+            bot = EdgeGPT.Chatbot(cookies=login["bing"]["cookies"])
 
             # Generate response
             async def generate():

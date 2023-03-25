@@ -1,0 +1,57 @@
+{
+    "dexcom": {
+        "_comment": "PASTE YOUR DEXCOM LOGIN AND PASSWORD, then choose if you're outside US (true/false)",
+        "login": "xd@example.com",
+        "password": "123passwd",
+        "OutsideUS": false
+    },
+
+    "chatAI":
+    {
+        "openai": { 
+            "_comment": "PASTE OPENAI API TOKEN",
+            "apiKey": "sk-something"
+        },
+    
+        "bing": {
+            "_comment": "PASTE LOGGED IN BING.COM COOKIES JSON (in default format)",
+            "cookies": [
+                {
+                    "domain": ".bing.com",
+                    "expirationDate": 123,
+                    "hostOnly": false,
+                    "httpOnly": false,
+                    "name": "SRCHUSR",
+                    "path": "/",
+                    "sameSite": "no_restriction",
+                    "secure": true,
+                    "session": false,
+                    "storeId": null,
+                    "value": "XDXD-XD"
+                },
+                {
+                    "domain": "www.bing.com",
+                    "expirationDate": 456,
+                    "hostOnly": true,
+                    "httpOnly": false,
+                    "name": "ai_session",
+                    "path": "/",
+                    "sameSite": "no_restriction",
+                    "secure": true,
+                    "session": false,
+                    "storeId": null,
+                    "value": "lel"
+                }
+            ]
+        }
+    },
+    "GPIO":
+    {
+        "OLEDScreen": {
+            "_comment": "PASTE YOUR OLED SCREEN WIDTH, HEIGHT and I2C ADDRESS (for most cases 0x3C or 0x3D)",
+            "address": "0x3C",
+            "width": 128,
+            "height": 64
+        }
+    }
+}

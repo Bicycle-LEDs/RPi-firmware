@@ -17,7 +17,7 @@ try:
     from helpers.textToSpeech import tts
 
     # Read credentials file
-    with open(script_dir + '/../credentials.json') as f:
+    with open(script_dir + '/../settings.json') as f:
         login = json.load(f)
 
     # Play sound
