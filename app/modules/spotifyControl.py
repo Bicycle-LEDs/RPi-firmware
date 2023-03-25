@@ -76,7 +76,7 @@ try:
             # Try logging-in
             headers = {'Content-Type': 'application/json',
                 'Authorization': 'Bearer {0}'.format(authorize["token"])}
-            response = requests.get(F"{authorize['api_url']}/me/player", headers=headers)
+            response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
 
             # Connection error
             if not response.status_code == 200:  connectionErr()
