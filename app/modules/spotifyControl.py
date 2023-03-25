@@ -76,7 +76,11 @@ try:
             print(infoMsg + F"(TTS) Łączenie z serwerem (polecenie: {command})...")
             os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify"')    
 
-            # Try logging-in
+            # Refresh token
+            spotifydata = {'grant_type': 'refresh_token', 'refresh_token':authorize["token"]}
+            response = requests.post(authorize["token_refresh_url"], data=spotifydata, auth=(authorize["clientID"], authorize["clientSecret"]))
+
+            # Try logging in
             headers = {'Content-Type': 'application/json', 'Authorization': F'Bearer {authorize["token"]}'}
             response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
 
