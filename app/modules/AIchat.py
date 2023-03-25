@@ -21,7 +21,9 @@ bingToDelete = [
 
 # Default message starts
 if chatType=='openai': textForCons='AI-CGPT'
-elif chatType=='bing': textForCons='AI-BING'
+else: 
+    chatType=='bing'
+    textForCons='AI-BING'
 infoMsg = colorama.Fore.GREEN + F"[{textForCons}] " + colorama.Style.RESET_ALL
 startingSpace = " "*len(F"[{textForCons}] ")
 warningMsg = colorama.Fore.YELLOW + F"[{textForCons}] " + colorama.Style.RESET_ALL
