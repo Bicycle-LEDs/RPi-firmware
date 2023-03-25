@@ -111,7 +111,7 @@ try:
                     if response.status_code == 200:
                         song_uri = json.loads(response.content.decode('utf-8'))["tracks"]["items"][0]["uri"]
                         query = { 'uri': song_uri}
-                        response = requests.post(F"{authorize['api_url']}me/player/queue?{urllib.urlencode(query)}", headers=headers)
+                        response = requests.post(F"{authorize['api_url']}me/player/queue?{urllib.parse.urlencode(query)}", headers=headers)
                         if response.status_code == 204:
                             response = requests.post(F"{authorize['api_url']}me/player/next", headers=headers)
 
@@ -129,3 +129,6 @@ except KeyboardInterrupt:
     print(ctrlCMsg)
 
 # Critical error handling
+except:
+    print(errorMsg + "Wystąpił nieprzewidziany błąd w skrypcie")
+    os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')
