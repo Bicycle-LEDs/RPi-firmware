@@ -110,10 +110,12 @@ try:
                     response = requests.get(F"{authorize['api_url']}search?{urllib.parse.urlencode(query)}", headers=headers)
                     if response.status_code == 200:
                         song_uri = json.loads(response.content.decode('utf-8'))["tracks"]["items"][0]["uri"]
+                        song_name = json.loads(response.content.decode('utf-8'))["tracks"]["items"][0]["name"]
                         query = { 'uri': song_uri}
                         response = requests.post(F"{authorize['api_url']}me/player/queue?{urllib.parse.urlencode(query)}", headers=headers)
                         if response.status_code == 204:
                             response = requests.post(F"{authorize['api_url']}me/player/next", headers=headers)
+                            message = 'Odtwarzam ' + colorama.Fore.CYAN + song_name
 
                 # Output message
                 if response.status_code == 204:
