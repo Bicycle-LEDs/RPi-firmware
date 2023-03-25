@@ -15,6 +15,7 @@ script_dir=os.path.dirname(os.path.realpath(__file__))
 bingToDelete = [
     "Czy chcesz wiedzieć coś więcej na ten temat?",
     "Czy chcesz wiedzieć więcej?",
+    "Czy chcesz wiedzieć coś więcej?"
     "[^1^]", "[^2^]", "[^3^]", "[^4^]", "[^5^]", "[^6^]",
 ]
 

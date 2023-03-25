@@ -6,6 +6,16 @@
         "OutsideUS": false
     },
 
+    "GPIO": 
+    {
+        "OLEDScreen": {
+            "_comment": "PASTE YOUR OLED SCREEN WIDTH, HEIGHT and I2C ADDRESS (for most cases 0x3C or 0x3D)",
+            "address": "0x3C",
+            "width": 128,
+            "height": 64
+        }
+    },
+
     "chatAI":
     {
         "openai": { 
@@ -43,15 +53,6 @@
                     "value": "lel"
                 }
             ]
-        }
-    },
-    "GPIO":
-    {
-        "OLEDScreen": {
-            "_comment": "PASTE YOUR OLED SCREEN WIDTH, HEIGHT and I2C ADDRESS (for most cases 0x3C or 0x3D)",
-            "address": "0x3C",
-            "width": 128,
-            "height": 64
         }
     }
 }
