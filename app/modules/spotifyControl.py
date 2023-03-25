@@ -106,8 +106,7 @@ try:
                 
                 # Search
                 elif command == "wyszukaj":
-                    print(text)
-                    query = { 'q': text, 'type': 'track', 'limit': 1}
+                    query = {'q': text, 'type': 'track', 'limit': '1'}
                     print(urllib.urlencode(query))
                     response = requests.get(F"{authorize['api_url']}search?{urllib.urlencode(query)}", headers=headers)
                     if response.status_code == 200:
