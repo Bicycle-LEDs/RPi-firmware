@@ -26,7 +26,7 @@ if not len(sys.argv) > 1:
 
     print(infoMsg + "Aktualizowanie kodu używając polecenia " + Fore.YELLOW + "git pull")
     print(startscriptMsg)
-    os.system('git pull')
+    os.system(F'cd {script_dir}&& git pull')
     print(endScriptMsg)
     print()
 
