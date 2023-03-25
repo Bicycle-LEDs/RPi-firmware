@@ -18,13 +18,11 @@ def tts(language, message):
         # Generate random string for filename - to prevent multi-script-running issues
         digits = random.choices(string.digits, k=3)
         letters = random.choices(string.ascii_letters, k=6)
-        filename = script_dir + '/'.join(random.sample(digits + letters, 9)) + '.mp3'
-        print(filename)
+        filename = script_dir + '/' + ''.join(random.sample(digits + letters, 9)) + '.mp3'
 
         # Generate audio file in argument 1 language and saying argument 2 text 
         TTS = gTTS(message, lang=language, lang_check=False)
         TTS.save(filename)
-        print("saved")
         # Read audio file
         os.system('mpg123 ' + filename)
         os.remove(filename)
