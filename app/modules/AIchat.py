@@ -23,6 +23,7 @@ bingToDelete = [
 if chatType=='openai': textForCons='AI-CGPT'
 elif chatType=='bing': textForCons='AI-BING'
 infoMsg = colorama.Fore.GREEN + F"[{textForCons}] " + colorama.Style.RESET_ALL
+startingSpace = " "*len(F"[{textForCons}] ")
 warningMsg = colorama.Fore.YELLOW + F"[{textForCons}] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + F"[{textForCons}] " + colorama.Style.RESET_ALL
 ctrlCMsg = "\n" + infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
@@ -59,7 +60,7 @@ try:
             openai.api_key = login["openai"]["apiKey"]
 
             # Generate response
-            print("(TTS) Łączenie z chatgpt i generowanie odpowiedzi...".rjust(len(infoMsg)))
+            print(startingSpace + "(TTS) Łączenie z chatgpt i generowanie odpowiedzi...")
             os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
             completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text + " - ogranicz odpowiedź do 30 słów"}], max_tokens=100)
             message = completion.choices[0].message.content
@@ -74,7 +75,7 @@ try:
 
             # Generate response
             async def generate():
-                print("(TTS) Łączenie z bing chat i generowanie odpowiedzi...".rjust(len(infoMsg)))
+                print(startingSpace + "(TTS) Łączenie z bing chat i generowanie odpowiedzi...")
                 os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
                 msg = await bot.ask(prompt=text + " - ogranicz odpowiedź do 30 słów", conversation_style=EdgeGPT.ConversationStyle.precise)
                 return msg
@@ -86,7 +87,7 @@ try:
 
         if not chatType==0:            
             # Output message
-            print(F"(TTS) Odpowiedź: {colorama.Fore.CYAN}{message}".rjust(len(infoMsg)))
+            print(startingSpace + F"(TTS) Odpowiedź: {colorama.Fore.CYAN}{message}")
             if tts('pl', message) == 3: print(ctrlCMsg)
 
     except:

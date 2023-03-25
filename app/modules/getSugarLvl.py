@@ -7,6 +7,7 @@ script_dir=os.path.dirname(os.path.realpath(__file__))
 
 # Default message starts
 infoMsg = colorama.Fore.GREEN + "[DEXC] " + colorama.Style.RESET_ALL
+startingSpace = " "*len("[DEXC] ")
 errorMsg = colorama.Fore.RED + "[DEXC] " + colorama.Style.RESET_ALL
 ctrlCMsg = "\n" + infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
 
@@ -51,7 +52,7 @@ try:
             trend = "wyznaczenie trendu nie powiodło się"
 
         # Read and print
-        print(F"(TTS) Poziom cukru: {colorama.Fore.CYAN}{str(bg.value)}{colorama.Style.RESET_ALL} - {colorama.Fore.CYAN}{trend} {bg.trend_arrow}".rjust(len(infoMsg)))
+        print(startingSpace + F"(TTS) Poziom cukru: {colorama.Fore.CYAN}{str(bg.value)}{colorama.Style.RESET_ALL} - {colorama.Fore.CYAN}{trend} {bg.trend_arrow}")
         if tts('pl', str(bg.value) + " i " + trend) == 3:
             print(ctrlCMsg)
 

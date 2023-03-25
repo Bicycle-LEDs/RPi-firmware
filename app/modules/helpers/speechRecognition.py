@@ -7,6 +7,7 @@ script_dir=os.path.dirname(os.path.realpath(__file__))
 
 # Default message starts
 infoMsg = colorama.Fore.GREEN + "[REC] " + colorama.Style.RESET_ALL
+startingSpace = " "*len("[REC] ")
 warningMsg = colorama.Fore.YELLOW + "[REC] " + colorama.Style.RESET_ALL
 errorMsg = colorama.Fore.RED + "[REC] " + colorama.Style.RESET_ALL
 ctrlCMsg = "\n" + infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + colorama.Style.RESET_ALL + ", wyjście do nadrzędnego skryptu"
@@ -26,10 +27,10 @@ def speechRecognition(lang, startSound=False):
             audio = r.listen(source)
 
         # Get Google opinion on what was said
-        print(" "*len(infoMsg) + "Próba przetworzenia na tekst...")
+        print(startingSpace + "Próba przetworzenia na tekst...")
         try:
             text = r.recognize_google(audio, language=lang).lower()
-            print(" "*len(infoMsg) + F"Rozpoznany tekst: {colorama.Fore.CYAN}{text}")
+            print(startingSpace + F"Rozpoznany tekst: {colorama.Fore.CYAN}{text}")
             return text
 
         # Unknown speech
