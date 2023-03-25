@@ -1,6 +1,6 @@
 [
     {
-        "name": "Sprawdź poziom cukru",
+        "name": "Dexcom",
         "exec": "getSugarLvl.py",
         "execInBackground": false,
         "aliases": 
@@ -13,7 +13,7 @@
             ]
     },
     {
-        "name": "Rozmawiaj z AI",
+        "name": "AIChat",
         "exec": "AIchat.py",
         "execInBackground": false,
         "aliases": 
@@ -22,5 +22,37 @@
                 "chcę porozmawiać",
                 "mam pytanie"
             ]
+    },
+    {
+        "name": "Spotify",
+        "exec": "spotifyControl.py",
+        "execInBackground": false,
+        "aliases": 
+        [
+            "kontroluj spotify",
+            "sterowanie muzyką",
+            "zmień piosenkę"
+        ],
+        "commands":
+        {
+            "play/pause": [
+                "zatrzymaj",
+                "wznów",
+                "pauza"
+            ],
+            "next": [
+                "pomiń",
+                "następny", "następna", "następne"
+            ],
+            "previous": [
+                "poprzedni",
+                "wróć"
+            ],
+            "search": [
+                "wyszukaj",
+                "znajdź",
+                "dodaj", "dodaj do", "dodaj do kolejki"
+            ]
+        }
     }
 ]

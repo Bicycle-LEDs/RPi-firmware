@@ -6,6 +6,12 @@
         "OutsideUS": false
     },
 
+    "spotify": {
+        "_comment": "PASTE YOUR SPOTIFY TOKEN (from developer.spotify.com)",
+        "token": "longlong-token",
+        "api_url": "https://api.spotify.com/v1/" 
+    },
+
     "GPIO": 
     {
         "OLEDScreen": {

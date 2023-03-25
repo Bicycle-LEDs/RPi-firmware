@@ -102,7 +102,6 @@ try:
 # Ctrl + C handle
 except KeyboardInterrupt:
     print(ctrlCMsg)
-    sys.exit(0)
 
 # Critical error
 except:

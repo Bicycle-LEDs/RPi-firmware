@@ -19,7 +19,7 @@ try:
 
     # Read credentials file
     with open(script_dir + '/../settings.json') as f:
-        login = json.load(f)
+        authorize = json.load(f)["dexcom"]
 
     # Play sound
     os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
@@ -28,7 +28,7 @@ try:
 
     try:
         # Try logging-in
-        dexcom = Dexcom(login["dexcom"]["login"], login["dexcom"]["password"], ous=login["dexcom"]["OutsideUS"])
+        dexcom = Dexcom(authorize["login"], authorize["password"], ous=authorize["OutsideUS"])
 
         # Get reading
         bg = dexcom.get_current_glucose_reading()
@@ -59,13 +59,11 @@ try:
     # Login error
     except:
         print(errorMsg + "(TTS) Połączenie z Dexcom nieudane")
-        if tts('pl', "Połączenie nieudane") == 3:
-            print(ctrlCMsg)
+        if tts('pl', "Połączenie nieudane") == 3: print(ctrlCMsg)
 
 # Ctrl + C handling
 except KeyboardInterrupt:
     print(ctrlCMsg)
-    sys.exit(0)
 
 # Critical error handling
 except:
