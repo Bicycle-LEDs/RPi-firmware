@@ -78,11 +78,12 @@ try:
             response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
 
             # Connection error
-            if not response.status_code == 200:  connectionErr()
+            if not response.status_code == 200: connectionErr()
 
             else: 
                 # Play/pause
                 if command == "p/p":
+                    print(json.loads(response.content.decode('utf-8')))
                     if json.loads(response.content.decode('utf-8'))["is_playing"]:
                         response = requests.get(F"{authorize['api_url']}me/player/pause", headers=headers)
                         message = 'Zatrzymano utwór'
