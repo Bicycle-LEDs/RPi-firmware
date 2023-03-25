@@ -115,7 +115,7 @@ try:
                         response = requests.post(F"{authorize['api_url']}me/player/queue?{urllib.parse.urlencode(query)}", headers=headers)
                         if response.status_code == 204:
                             response = requests.post(F"{authorize['api_url']}me/player/next", headers=headers)
-                            message = 'Odtwarzam ' + colorama.Fore.CYAN + song_name
+                            message = 'Odtwarzam "' + song_name + '"'
 
                 # Output message
                 if response.status_code == 204:
