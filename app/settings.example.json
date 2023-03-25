@@ -7,11 +7,9 @@
     },
 
     "spotify": {
-        "_comment": "PASTE YOUR SPOTIFY TOKEN and CREDENTIALS for auto token-renewal (from developer.spotify.com)",
-        "token": "longlong-token",
+        "_comment": "PASTE YOUR SPOTIFY REDENTIALS (from developer.spotify.com)",
         "clientID": "xdxd",
         "clientSecret": "xdxdxd",
-        "token_refresh_url": "https://accounts.spotify.com/api/token",
         "api_url": "https://api.spotify.com/v1/" 
     },
 

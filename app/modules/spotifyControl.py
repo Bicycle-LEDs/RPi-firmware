@@ -1,5 +1,5 @@
 # Import libs
-import os, json, colorama
+import os, json, colorama, base64
 colorama.init()
 
 # Script directory
@@ -76,14 +76,10 @@ try:
             print(infoMsg + F"(TTS) Łączenie z serwerem (polecenie: {command})...")
             os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify"')    
 
-            # Refresh token
-            spotifydata = {'grant_type': 'refresh_token', 'refresh_token':authorize["token"]}
-            response = requests.post(authorize["token_refresh_url"], data=spotifydata, auth=(authorize["clientID"], authorize["clientSecret"]))
-            print(response)
-
             # Try logging in
-            headers = {'Content-Type': 'application/json', 'Authorization': F'Bearer {authorize["token"]}'}
+            headers = {'Content-Type': 'application/json', 'Authorization': F'Basic {base64.b64encode((authorize["clientID"] + authorize["clientSecret"]).encode("ascii"))}'}
             response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
+            print(response)
 
             # Connection error
             if not response.status_code == 200: connectionErr()
