@@ -20,7 +20,7 @@ try:
 
     # Connection error function
     def connectionErr():
-        print(warningMsg + F"(TTS) Połączenie ze spotify API nieudane: {response.status_code}")
+        print(warningMsg + F"(TTS) Połączenie ze spotify API nieudane: {response.status_code} - {json.loads(response.content.decode('utf-8'))['error']['message']}")
         if tts('pl', "Połączenie nieudane") == 3: print(ctrlCMsg)
 
     # Recognize voice
@@ -71,11 +71,10 @@ try:
         
         if command:
             print(infoMsg + F"(TTS) Łączenie z serwerem (polecenie: {command})...")
-            os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Logowanie do spotify..."')    
+            os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify"')    
 
             # Try logging-in
-            headers = {'Content-Type': 'application/json',
-                'Authorization': 'Bearer {0}'.format(authorize["token"])}
+            headers = {'Content-Type': 'application/json', 'Authorization': F'Bearer {authorize["token"]}'}
             response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
 
             # Connection error
