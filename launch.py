@@ -1,6 +1,5 @@
 import os, sys
 from colorama import init, Fore, Style
-import pkg_resources
 script_dir=os.path.dirname(os.path.realpath(__file__))
 init()
 
@@ -30,10 +29,9 @@ if not len(sys.argv) > 1:
     print(endScriptMsg)
     print()
 
-    print(infoMsg + "Aktualizowanie bibliotek używając polecenia " + Fore.YELLOW + "pip install -U")
+    print(infoMsg + "Aktualizowanie bibliotek używając polecenia " + Fore.YELLOW + "pip install -U" + Style.RESET_ALL + " ze skryptu install.sh")
     print(startscriptMsg)
-    packages = [dist.project_name for dist in pkg_resources.working_set]
-    os.system("sudo pip install --upgrade " + ' '.join(packages))
+    os.system("sh install.sh ")
     print(endScriptMsg)
     print()
 
