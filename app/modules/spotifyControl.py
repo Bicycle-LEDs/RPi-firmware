@@ -87,11 +87,11 @@ try:
                 # Play/pause
                 if command == "odtwórz/wstrzymaj":
                     if json.loads(response.content.decode('utf-8'))["is_playing"]:
-                        response = requests.post(F"{authorize['api_url']}me/player/pause", headers=headers)
+                        response = requests.put(F"{authorize['api_url']}me/player/pause", headers=headers)
                         message = 'Zatrzymano utwór'
 
                     else:
-                        response = requests.post(F"{authorize['api_url']}me/player/play", headers=headers)
+                        response = requests.put(F"{authorize['api_url']}me/player/play", headers=headers)
                         message = 'Wznowiono odtwarzanie'
 
                 # Next
