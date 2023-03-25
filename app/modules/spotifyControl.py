@@ -83,7 +83,7 @@ try:
             else: 
                 # Play/pause
                 if command == "p/p":
-                    print(json.loads(response.content.decode('utf-8')))["is_playing"]
+                    print(json.loads(response.content.decode('utf-8'))["is_playing"])
                     if json.loads(response.content.decode('utf-8'))["is_playing"]:
                         response = requests.get(F"{authorize['api_url']}me/player/pause", headers=headers)
                         message = 'Zatrzymano utwór'
