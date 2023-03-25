@@ -106,8 +106,8 @@ try:
                 
                 # Search
                 elif command == "wyszukaj":
-                    query = {'q': str(text)}
-                    response = requests.get(F"{authorize['api_url']}search?{urllib.urlencode(query)}&type=track&limit=1", headers=headers)
+                    query = {'q': text, 'type': 'track', 'limit': 1}
+                    response = requests.get(F"{authorize['api_url']}search?{urllib.parse.urlencode(query)}", headers=headers)
                     if response.status_code == 200:
                         song_uri = json.loads(response.content.decode('utf-8'))["tracks"]["items"][0]["uri"]
                         query = { 'uri': song_uri}
@@ -129,3 +129,6 @@ except KeyboardInterrupt:
     print(ctrlCMsg)
 
 # Critical error handling
+except:
+    print(errorMsg + "Wystąpił nieprzewidziany błąd w skrypcie")
+    os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')
