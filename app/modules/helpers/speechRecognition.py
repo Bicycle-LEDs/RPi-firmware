@@ -29,7 +29,7 @@ def speechRecognition(lang, startSound=False):
         print("XD" + "Próba przetworzenia na tekst...".rjust(len(infoMsg)))
         try:
             text = r.recognize_google(audio, language=lang).lower()
-            print(F"Rozpoznany tekst: {colorama.Fore.CYAN}{text}".rjust(len(infoMsg)))
+            print(F"Rozpoznany tekst: {colorama.Fore.CYAN}{text}".rjust(10))
             return text
 
         # Unknown speech
