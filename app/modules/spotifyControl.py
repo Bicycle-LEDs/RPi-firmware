@@ -129,6 +129,3 @@ except KeyboardInterrupt:
     print(ctrlCMsg)
 
 # Critical error handling
-except:
-    print(errorMsg + "Wystąpił nieprzewidziany błąd w skrypcie")
-    os.system(F'mpg123 {script_dir}/../sounds/scriptError.mp3')
