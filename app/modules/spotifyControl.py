@@ -106,7 +106,9 @@ try:
                 
                 # Search
                 elif command == "wyszukaj":
+                    print(text)
                     query = { 'q': text, 'type': 'track', 'limit': 1}
+                    print(urllib.urlencode(query))
                     response = requests.get(F"{authorize['api_url']}search?{urllib.urlencode(query)}", headers=headers)
                     if response.status_code == 200:
                         song_uri = json.loads(response.content.decode('utf-8'))["tracks"]["items"][0]["uri"]
@@ -117,7 +119,7 @@ try:
 
                 # Output message
                 if response.status_code == 204:
-                    print(startingSpace + F"(TTS) {colorama.Fore.CYAN}{message}")
+                    print(startingSpace + F"(TTS) {message}")
                     if tts('pl', message) == 3: print(ctrlCMsg)
 
                 # Connection error
