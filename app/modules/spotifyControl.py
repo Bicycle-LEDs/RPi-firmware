@@ -20,7 +20,7 @@ try:
 
     # Connection error function
     def connectionErr():
-        print(warningMsg + F"(TTS) Połączenie ze spotify API nieudane")
+        print(warningMsg + F"(TTS) Połączenie ze spotify API nieudane: {response.status_code}")
         if tts('pl', "Połączenie nieudane") == 3: print(ctrlCMsg)
 
     # Recognize voice
