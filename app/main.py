@@ -89,7 +89,6 @@ while True:
                             # Execute
                             os.system(F'python {script_dir}/modules/{module["exec"]}')
                             if UseOLED: OLEDRefresh()
-                            print(F"{infoMsg}Skrypt zakończył działanie")
                             print(colorama.Fore.BLUE + breakMsg)
                             print()
 
