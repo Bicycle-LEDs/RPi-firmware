@@ -21,10 +21,9 @@ try:
     # Connection error function
     def connectionErr():
         try:
-            errmsg=json.loads(response.content.decode('utf-8'))['error']['message']
-        except:
-            errmsg=response.content.decode('utf-8')
-        print(warningMsg + F"(TTS) Połączenie ze spotify API nieudane: {response.status_code} - {errmsg}")
+            errmsg=' - ' + json.loads(response.content.decode('utf-8'))['error']['message']
+        except: errmsg=''
+        print(warningMsg + F"(TTS) Połączenie ze spotify API nieudane: {response.status_code}{errmsg}")
         if tts('pl', "Połączenie nieudane") == 3: print(ctrlCMsg)
 
     # Recognize voice
@@ -88,21 +87,21 @@ try:
                 # Play/pause
                 if command == "odtwórz/wstrzymaj":
                     if json.loads(response.content.decode('utf-8'))["is_playing"]:
-                        response = requests.get(F"{authorize['api_url']}me/player/pause", headers=headers)
+                        response = requests.post(F"{authorize['api_url']}me/player/pause", headers=headers)
                         message = 'Zatrzymano utwór'
 
                     else:
-                        response = requests.get(F"{authorize['api_url']}me/player/play", headers=headers)
+                        response = requests.post(F"{authorize['api_url']}me/player/play", headers=headers)
                         message = 'Wznowiono odtwarzanie'
 
                 # Next
                 elif command == "następny":
-                    response = requests.get(F"{authorize['api_url']}me/player/next", headers=headers)
+                    response = requests.post(F"{authorize['api_url']}me/player/next", headers=headers)
                     message = 'Pominięto utwór'
 
                 # Previous
                 elif command == "poprzedni":
-                    response = requests.get(F"{authorize['api_url']}me/player/previous", headers=headers)
+                    response = requests.post(F"{authorize['api_url']}me/player/previous", headers=headers)
                     message = 'Cofnięto do poprzedniego utworu'
                 
                 # Search
@@ -112,9 +111,9 @@ try:
                     if response.status_code == 200:
                         song_uri = json.loads(response.content.decode('utf-8'))["tracks"]["items"][0]["uri"]
                         query = { 'uri': song_uri}
-                        response = requests.get(F"{authorize['api_url']}me/player/queue?{urllib.urlencode(query)}", headers=headers)
+                        response = requests.post(F"{authorize['api_url']}me/player/queue?{urllib.urlencode(query)}", headers=headers)
                         if response.status_code == 204:
-                            response = requests.get(F"{authorize['api_url']}me/player/next", headers=headers)
+                            response = requests.post(F"{authorize['api_url']}me/player/next", headers=headers)
 
                 # Output message
                 if response.status_code == 204:
