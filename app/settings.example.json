@@ -10,7 +10,6 @@
         "_comment": "PASTE YOUR SPOTIFY REDENTIALS (from developer.spotify.com)",
         "clientID": "xdxd",
         "clientSecret": "xdxdxd",
-        "username": "somerandomletters",
         "api_url": "https://api.spotify.com/v1/" ,
         "genToken_url": "https://accounts.spotify.com/api/token/"
     },
