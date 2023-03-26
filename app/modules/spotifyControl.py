@@ -74,7 +74,7 @@ try:
         
         if command:
             print(infoMsg + F"(TTS) Łączenie z serwerem (polecenie: {command})...")
-            os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify"')    
+            os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify" >/dev/null 2>&1 < /dev/null &')    
 
             # Try to generate token
             auth_str = f'{authorize["clientID"]}:{authorize["clientSecret"]}'
@@ -97,7 +97,7 @@ try:
 
                 # Login using token
                 token = response.json()["access_token"]
-                headers = {'Content-Type': 'application/json', 'Authorization': F'Basic {base64.b64encode((authorize["clientID"] + authorize["clientSecret"]).encode("ascii"))}'}
+                headers = {'Content-Type': 'application/json', 'Authorization': F'Bearer {token}'}
                 response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
 
                 # Connection error

@@ -22,9 +22,9 @@ try:
         authorize = json.load(f)["dexcom"]
 
     # Play sound
-    os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
+    os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null 2>&1 < /dev/null &')
     print(infoMsg + "(TTS) Łączenie z serwerem...")
-    os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie z dexcom"')    
+    os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie z dexcom" >/dev/null 2>&1 < /dev/null &')    
 
     try:
         # Try logging-in

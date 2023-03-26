@@ -63,7 +63,7 @@ try:
 
             # Generate response
             print(startingSpace + "(TTS) Łączenie z chatgpt i generowanie odpowiedzi...")
-            os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
+            os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź" >/dev/null 2>&1 < /dev/null &')
             completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text + " - ogranicz odpowiedź do 30 słów"}], max_tokens=100)
             message = completion.choices[0].message.content
 
@@ -78,7 +78,7 @@ try:
             # Generate response
             async def generate():
                 print(startingSpace + "(TTS) Łączenie z bing chat i generowanie odpowiedzi...")
-                os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź"')
+                os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Zaczekaj na odpowiedź" >/dev/null 2>&1 < /dev/null &')
                 msg = await bot.ask(prompt=text + " - ogranicz odpowiedź do 30 słów", conversation_style=EdgeGPT.ConversationStyle.precise)
                 return msg
     
