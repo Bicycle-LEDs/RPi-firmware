@@ -19,11 +19,11 @@ try:
     from helpers.textToSpeech import tts
 
     # Connection error function
-    def connectionErr():
+    def connectionErr(moment):
         try:
             errmsg=' - ' + json.loads(response.content.decode('utf-8'))['error']['message']
         except: errmsg=''
-        print(warningMsg + F"(TTS) Połączenie ze spotify API nieudane: {response.status_code}{errmsg}")
+        print(warningMsg + F"(TTS) Połączenie ze spotify API nieudane ({moment}): {response.status_code}{errmsg}")
         if tts('pl', "Połączenie nieudane") == 3: print(ctrlCMsg)
 
     # Recognize voice
@@ -91,7 +91,7 @@ try:
             response = requests.post(**auth_options)
 
             # Connection error
-            if not response.status_code == 200: connectionErr()
+            if not response.status_code == 200: connectionErr(1)
 
             else: 
 
@@ -101,7 +101,7 @@ try:
                 response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
 
                 # Connection error
-                if not response.status_code == 200: connectionErr()
+                if not response.status_code == 200: connectionErr(2)
 
                 else: 
                     # Play/pause
@@ -144,7 +144,7 @@ try:
 
                     # Connection error
                     else:
-                        connectionErr()
+                        connectionErr(3)
 
 # Ctrl + C handling
 except KeyboardInterrupt:
