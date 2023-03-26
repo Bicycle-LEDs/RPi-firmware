@@ -72,7 +72,8 @@ try:
             # Login to spotify
             spotify = spotipy.Spotify(auth_manager=spotipy.oauth2.SpotifyOAuth(client_id=authorize['clientID'],
                                                                           client_secret=authorize['clientSecret'],
-                                                                          redirect_uri="http://localhost:8080/callback/"))
+                                                                          redirect_uri="http://localhost:8080/callback/"
+                                                                          scope="user-read-playback-state"))
             # Play/pause
             if command == "odtwórz/wstrzymaj":
                 print('hmm')
