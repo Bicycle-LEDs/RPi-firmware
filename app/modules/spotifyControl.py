@@ -77,12 +77,12 @@ try:
             os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify" >/dev/null 2>&1 < /dev/null &')    
 
             # Try to generate token
-            auth_str = f'{authorize["clientID"]}:{authorize["clientSecret"]}'
-            b64_auth_str = base64.b64encode(auth_str.encode()).decode()
+            b64_auth_str = base64.b64encode(f'{authorize["clientID"]}:{authorize["clientSecret"]}')
             auth_options = {
                 "url": authorize["genToken_url"],
                 "headers": {
-                    "Authorization": f"Basic {b64_auth_str}"
+                    "Authorization": f"Basic {b64_auth_str}",
+                    "Content-Type": "application/x-www-form-urlencoded"
                 },
                 "data": {
                     "grant_type": "client_credentials"
