@@ -81,10 +81,9 @@ try:
             response = requests.post(authorize["genToken_url"], data={"grant_type": "client_credentials"}, headers={"Authorization": f"Basic {client_creds}"}), 
 
             # Login using token
-            token = response.json()["access_token"]
-            print(token)
+            print(response)
             
-            headers = {'Content-Type': 'application/json', 'Authorization': F'Bearer {token}'}
+            headers = {'Content-Type': 'application/json', 'Authorization': F'Bearer {response}'}
             response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
 
             # Connection error
