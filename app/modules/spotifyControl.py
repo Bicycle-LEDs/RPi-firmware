@@ -78,7 +78,7 @@ try:
             os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify" >/dev/null 2>&1 < /dev/null &')    
 
             # Try to generate token
-            client_creds = base64.b64decode(f"{authorize['clientID']}:{authorize['clientSecret']}".encode())
+            client_creds = base64.b64decode(f"{authorize['clientID']}:{authorize['clientSecret']}".encode()).decode()
             response = requests.post(
                 'https://accounts.spotify.com/api/token',
                 data={
@@ -86,7 +86,7 @@ try:
                 },
                 headers={
                     'Content-Type': 'application/x-www-form-urlencoded', 
-                    'Authorization': f"Basic {client_creds.decode()}"
+                    'Authorization': f"Basic {client_creds}"
                 }
             )
 
