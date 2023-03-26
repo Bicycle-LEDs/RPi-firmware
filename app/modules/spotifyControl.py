@@ -86,7 +86,7 @@ try:
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 data={
-                    "grant_type": "client_credentials",
+                    "grant_type": "client_credentials"
                 }
             )
 
