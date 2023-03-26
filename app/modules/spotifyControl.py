@@ -78,6 +78,7 @@ try:
 
             # Try to generate token
             client_creds = base64.b64encode(f"{authorize['clientID']}:{authorize['clientSecret']}".encode())
+            print(client_creds)
             response = requests.post(authorize["genToken_url"], data={"grant_type": "client_credentials"}, headers={'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': f"Basic {client_creds}"}) 
 
             # Connection error
