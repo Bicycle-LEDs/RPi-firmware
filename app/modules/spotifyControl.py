@@ -97,7 +97,7 @@ try:
 
                 # Login using token
                 token = response.json()["access_token"]
-                print(response)
+                print(response.json())
                 print(token)
                 headers = {'Authorization': F'Bearer {token}', 'Content-Type': 'application/json'}
                 response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
