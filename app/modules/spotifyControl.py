@@ -76,56 +76,75 @@ try:
             print(infoMsg + F"(TTS) Łączenie z serwerem (polecenie: {command})...")
             os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify"')    
 
-            # Try logging in
-            headers = {'Content-Type': 'application/json', 'Authorization': F'Basic {base64.b64encode((authorize["clientID"] + authorize["clientSecret"]).encode("ascii"))}'}
-            response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
-            print(response)
+            # Try to generate token
+            auth_str = f'{authorize["clientID"]}:{authorize["clientSecret"]}'
+            b64_auth_str = base64.b64encode(auth_str.encode()).decode()
+            auth_options = {
+                "url": authorize["genToken_url"],
+                "headers": {
+                    "Authorization": f"Basic {b64_auth_str}"
+                },
+                "data": {
+                    "grant_type": "client_credentials"
+                }
+            }
+            response = requests.post(**auth_options)
 
             # Connection error
             if not response.status_code == 200: connectionErr()
 
             else: 
-                # Play/pause
-                if command == "odtwórz/wstrzymaj":
-                    if json.loads(response.content.decode('utf-8'))["is_playing"]:
-                        response = requests.put(F"{authorize['api_url']}me/player/pause", headers=headers)
-                        message = 'Zatrzymano utwór'
 
-                    else:
-                        response = requests.put(F"{authorize['api_url']}me/player/play", headers=headers)
-                        message = 'Wznowiono odtwarzanie'
-
-                # Next
-                elif command == "następny":
-                    response = requests.post(F"{authorize['api_url']}me/player/next", headers=headers)
-                    message = 'Pominięto utwór'
-
-                # Previous
-                elif command == "poprzedni":
-                    response = requests.post(F"{authorize['api_url']}me/player/previous", headers=headers)
-                    message = 'Cofnięto do poprzedniego utworu'
-                
-                # Search
-                elif command == "wyszukaj":
-                    query = {'q': text, 'type': 'track', 'limit': 1}
-                    response = requests.get(F"{authorize['api_url']}search?{urllib.parse.urlencode(query)}", headers=headers)
-                    if response.status_code == 200:
-                        song_uri = json.loads(response.content.decode('utf-8'))["tracks"]["items"][0]["uri"]
-                        song_name = json.loads(response.content.decode('utf-8'))["tracks"]["items"][0]["name"]
-                        query = { 'uri': song_uri}
-                        response = requests.post(F"{authorize['api_url']}me/player/queue?{urllib.parse.urlencode(query)}", headers=headers)
-                        if response.status_code == 204:
-                            response = requests.post(F"{authorize['api_url']}me/player/next", headers=headers)
-                            message = 'Odtwarzam "' + song_name + '"'
-
-                # Output message
-                if response.status_code == 204:
-                    print(startingSpace + F"(TTS) {message}")
-                    if tts('pl', message) == 3: print(ctrlCMsg)
+                # Login using token
+                token = response.json()["access_token"]
+                headers = {'Content-Type': 'application/json', 'Authorization': F'Basic {base64.b64encode((authorize["clientID"] + authorize["clientSecret"]).encode("ascii"))}'}
+                response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
 
                 # Connection error
-                else:
-                    connectionErr()
+                if not response.status_code == 200: connectionErr()
+
+                else: 
+                    # Play/pause
+                    if command == "odtwórz/wstrzymaj":
+                        if json.loads(response.content.decode('utf-8'))["is_playing"]:
+                            response = requests.put(F"{authorize['api_url']}me/player/pause", headers=headers)
+                            message = 'Zatrzymano utwór'
+
+                        else:
+                            response = requests.put(F"{authorize['api_url']}me/player/play", headers=headers)
+                            message = 'Wznowiono odtwarzanie'
+
+                    # Next
+                    elif command == "następny":
+                        response = requests.post(F"{authorize['api_url']}me/player/next", headers=headers)
+                        message = 'Pominięto utwór'
+
+                    # Previous
+                    elif command == "poprzedni":
+                        response = requests.post(F"{authorize['api_url']}me/player/previous", headers=headers)
+                        message = 'Cofnięto do poprzedniego utworu'
+                    
+                    # Search
+                    elif command == "wyszukaj":
+                        query = {'q': text, 'type': 'track', 'limit': 1}
+                        response = requests.get(F"{authorize['api_url']}search?{urllib.parse.urlencode(query)}", headers=headers)
+                        if response.status_code == 200:
+                            song_uri = json.loads(response.content.decode('utf-8'))["tracks"]["items"][0]["uri"]
+                            song_name = json.loads(response.content.decode('utf-8'))["tracks"]["items"][0]["name"]
+                            query = { 'uri': song_uri}
+                            response = requests.post(F"{authorize['api_url']}me/player/queue?{urllib.parse.urlencode(query)}", headers=headers)
+                            if response.status_code == 204:
+                                response = requests.post(F"{authorize['api_url']}me/player/next", headers=headers)
+                                message = 'Odtwarzam "' + song_name + '"'
+
+                    # Output message
+                    if response.status_code == 204:
+                        print(startingSpace + F"(TTS) {message}")
+                        if tts('pl', message) == 3: print(ctrlCMsg)
+
+                    # Connection error
+                    else:
+                        connectionErr()
 
 # Ctrl + C handling
 except KeyboardInterrupt:
