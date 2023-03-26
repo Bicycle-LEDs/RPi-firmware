@@ -77,7 +77,7 @@ try:
             os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify" >/dev/null 2>&1 < /dev/null &')    
 
             # Try to generate token
-            response = requests.post(F'{authorize["genToken_url"]}?username={authorize["username"]}', {
+            response = requests.post(F'{authorize["genToken_url"]}', {
                 'grant_type': 'client_credentials',
                 'client_id': authorize["clientID"],
                 'client_secret': authorize["clientSecret"],
