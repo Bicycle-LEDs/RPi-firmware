@@ -86,7 +86,7 @@ try:
                 },
                 headers={
                     'Content-Type': 'application/x-www-form-urlencoded', 
-                    'Authorization': f"Basic {client_creds}"
+                    'Authorization': f"Basic {client_creds.decode()}"
                 }
             )
 
