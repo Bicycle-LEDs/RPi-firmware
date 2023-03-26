@@ -73,10 +73,10 @@ try:
             spotify = spotipy.Spotify(auth_manager=spotipy.oauth2.SpotifyOAuth(client_id=authorize['clientID'],
                                                                           client_secret=authorize['clientSecret'],
                                                                           redirect_uri="http://localhost:8080/callback/"))
-            print('hmm')
             # Play/pause
             if command == "odtwórz/wstrzymaj":
                 print(spotify.current_playback())
+                print('hmm')
 
                 if spotify.current_playback():
                     message = 'Zatrzymano utwór'
