@@ -14,7 +14,7 @@ ctrlCMsg = "\n" + infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + coloram
 
 try:
     # Import scripts
-    import requests, urllib, base64
+    import requests, urllib, base64, webbrowser
     from helpers.speechRecognition import speechRecognition
     from helpers.textToSpeech import tts
 
@@ -78,8 +78,27 @@ try:
             os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify" >/dev/null 2>&1 < /dev/null &')    
 
             # Try to generate token
-            client_creds = base64.b64encode(f"{authorize['clientID']}:{authorize['clientSecret']}".encode('ascii')).decode('ascii')
-            response = requests.post(authorize["genToken_url"], data={"grant_type": "client_credentials"}, headers={'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': f"Basic {client_creds}", }) 
+            webbrowser.open(
+                'https://accounts.spotify.com/authorize?' + 
+                urllib.parse.urlencode(
+                    {
+                        'client_id': authorize['clientID'],
+                        'response_type': 'code',
+                        'scope': 'user-modify-playback-state,user-read-playback-state,user-read-currently-playing',
+                        'redirect_uri': 'http://localhost:8080/callback/'
+                    }
+                )
+            )
+            client_creds = base64.b64encode(f"{authorize['clientID']}:{authorize['clientSecret']}".encode()).decode()
+            response = requests.post(
+                'https://accounts.spotify.com/api/token',
+                data={
+                    'grant_type': 'client_credentials',
+                },
+                headers={
+                'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': f"Basic {client_creds}"
+                }
+            )
 
             # Connection error
             if not response.status_code == 200: connectionErr(1)
