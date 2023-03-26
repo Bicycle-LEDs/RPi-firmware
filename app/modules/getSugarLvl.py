@@ -24,7 +24,7 @@ try:
     # Play sound
     os.system(F'setsid mpg123 {script_dir}/../sounds/gotIt.mp3 >/dev/null')
     print(infoMsg + "(TTS) Łączenie z serwerem...")
-    os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Łączenie z dexcom"')    
+    os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie z dexcom"')    
 
     try:
         # Try logging-in

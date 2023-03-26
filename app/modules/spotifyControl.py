@@ -74,7 +74,7 @@ try:
         
         if command:
             print(infoMsg + F"(TTS) Łączenie z serwerem (polecenie: {command})...")
-            os.system(F'python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify"')    
+            os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify"')    
 
             # Try logging in
             headers = {'Content-Type': 'application/json', 'Authorization': F'Basic {base64.b64encode((authorize["clientID"] + authorize["clientSecret"]).encode("ascii"))}'}

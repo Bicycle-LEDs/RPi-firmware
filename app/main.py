@@ -78,7 +78,7 @@ while True:
                         if module["execInBackground"]:
                             print(F"{infoMsg}Skrypt {colorama.Fore.YELLOW}{module['exec']}{colorama.Style.RESET_ALL} został uruchomiony w tle")
                             # Execute
-                            os.system(F'setsid python {script_dir}/modules/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
+                            os.system(F'setsid python {script_dir}/modules/{module["exec"]}')
                         
                         # If executed on top
                         else:
