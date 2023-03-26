@@ -75,8 +75,9 @@ try:
                                                                           redirect_uri="http://localhost:8080/callback/"))
             # Play/pause
             if command == "odtwórz/wstrzymaj":
-                print(spotify.current_playback())
                 print('hmm')
+                print(spotify.current_playback())
+                print('hmm2')
 
                 if spotify.current_playback():
                     message = 'Zatrzymano utwór'
