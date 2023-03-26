@@ -14,7 +14,7 @@ ctrlCMsg = "\n" + infoMsg + "Użyto" + colorama.Fore.RED + " Ctrl + C" + coloram
 
 try:
     # Import scripts
-    import requests, urllib, base64, webbrowser
+    import requests, urllib, base64
     from helpers.speechRecognition import speechRecognition
     from helpers.textToSpeech import tts
 
@@ -78,7 +78,7 @@ try:
             os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify" >/dev/null 2>&1 < /dev/null &')    
 
             # Try to generate token
-            client_creds = str(base64.b64decode(f"{authorize['clientID']}:{authorize['clientSecret']}".encode('utf-8')), 'utf-8')
+            client_creds = base64.b64decode(f"{authorize['clientID']}:{authorize['clientSecret']}".encode()).decode()
             response = requests.post(
                 'https://accounts.spotify.com/api/token',
                 headers={
@@ -98,7 +98,7 @@ try:
                 # Login using token
                 token = response.json()["access_token"]
                 print(token)
-                headers = {'Content-Type': 'application/json', 'Authorization': F'Bearer {token}'}
+                headers = {'Authorization': F'Bearer {token}', 'Content-Type': 'application/json'}
                 response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
 
                 # Connection error
