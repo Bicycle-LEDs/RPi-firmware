@@ -77,8 +77,8 @@ try:
             os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify" >/dev/null 2>&1 < /dev/null &')    
 
             # Try to generate token
-            client_creds = base64.b64encode(f"{authorize['clientID']}:{authorize['clientSecret']}".encode()).decode()
-            response = requests.post(authorize["genToken_url"], data={"grant_type": "client_credentials"}, headers={'Authorization': f"Basic {client_creds}"}) 
+            client_creds = base64.b64encode(f"{authorize['clientID']}:{authorize['clientSecret']}".encode())
+            response = requests.post(authorize["genToken_url"], data={"grant_type": "client_credentials"}, headers={'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': f"Basic {client_creds.decode()}"}) 
 
             # Connection error
             if not response.status_code == 200: connectionErr(1)
