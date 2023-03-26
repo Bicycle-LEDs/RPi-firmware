@@ -76,21 +76,23 @@ while True:
                     if index != -1:
                         # If needed to be executed in background
                         if module["execInBackground"]:
-                            print(F"{infoMsg}Skrypt {colorama.Fore.YELLOW}{module['exec']}{colorama.Style.RESET_ALL} został uruchomiony w tle")
-                            # Execute
-                            os.system(F'setsid python {script_dir}/modules/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
+                            if not module["disabled"]:
+                                print(F"{infoMsg}Skrypt {colorama.Fore.YELLOW}{module['exec']}{colorama.Style.RESET_ALL} został uruchomiony w tle")
+                                # Execute
+                                os.system(F'setsid python {script_dir}/modules/{module["exec"]} >/dev/null 2>&1 < /dev/null &')
                         
                         # If executed on top
                         else:
-                            print()
-                            print(F"{infoMsg}Uruchamianie {colorama.Fore.YELLOW}{module['exec']}")
-                            if UseOLED: OLEDRefresh(module["exec"])
-                            print(breakMsg)
-                            # Execute
-                            os.system(F'python {script_dir}/modules/{module["exec"]}')
-                            if UseOLED: OLEDRefresh()
-                            print(colorama.Fore.BLUE + breakMsg)
-                            print()
+                            if not module["disabled"]:
+                                print()
+                                print(F"{infoMsg}Uruchamianie {colorama.Fore.YELLOW}{module['exec']}")
+                                if UseOLED: OLEDRefresh(module["exec"])
+                                print(breakMsg)
+                                # Execute
+                                os.system(F'python {script_dir}/modules/{module["exec"]}')
+                                if UseOLED: OLEDRefresh()
+                                print(colorama.Fore.BLUE + breakMsg)
+                                print()
 
     except KeyboardInterrupt:
         ctrlCProcedure()

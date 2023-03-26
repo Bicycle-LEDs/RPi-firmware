@@ -2,6 +2,7 @@
     {
         "name": "Dexcom",
         "exec": "getSugarLvl.py",
+        "disabled": false,
         "execInBackground": false,
         "aliases": 
             [
@@ -15,6 +16,7 @@
     {
         "name": "AIChat",
         "exec": "AIchat.py",
+        "disabled": false,
         "execInBackground": false,
         "aliases": 
             [
@@ -26,6 +28,7 @@
     {
         "name": "Spotify",
         "exec": "spotifyControl.py",
+        "disabled": true,
         "execInBackground": false,
         "aliases": 
         [
