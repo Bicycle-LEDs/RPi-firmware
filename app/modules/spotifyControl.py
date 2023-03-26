@@ -77,7 +77,7 @@ try:
             os.system(F'setsid python {script_dir}/helpers/textToSpeech.py pl "Łączenie ze spotify" >/dev/null 2>&1 < /dev/null &')    
 
             # Try to generate token
-            response = requests.post(authorize["genToken_url"], {
+            response = requests.post(F'{authorize["genToken_url"]}?username={authorize["username"]}', {
                 'grant_type': 'client_credentials',
                 'client_id': authorize["clientID"],
                 'client_secret': authorize["clientSecret"],
@@ -90,7 +90,6 @@ try:
 
                 # Login using token
                 token = response.json()["access_token"]
-                token=authorize["token"]
                 headers = {'Content-Type': 'application/json', 'Authorization': F'Bearer {token}'}
                 response = requests.get(F"{authorize['api_url']}me/player", headers=headers)
 
