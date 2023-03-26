@@ -29,7 +29,7 @@ try:
     # Recognize voice
     print(infoMsg + "Uruchamianie rozpoznawania mowy...")
     #text = speechRecognition(lang='pl-PL', startSound=True)
-    text='zatrzymaj'
+    text='wyszukaj wellerman'
 
     if text == 1 or text == 2 or text == False:
         print(warningMsg + "(TTS) Mowa nierozpoznana")
